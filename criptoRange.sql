@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.5.1 (32 bit)
-MySQL - 10.1.38-MariaDB : Database - crypto
+MySQL - 10.1.38-MariaDB : Database - crypto_range
 *********************************************************************
 */
 
@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `account`;
 CREATE TABLE `account` (
   `pkey` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
-  `email` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `crypto` varchar(255) DEFAULT '0',
   `role` int(255) NOT NULL,
@@ -34,19 +34,19 @@ CREATE TABLE `account` (
   `verificationtime` varchar(255) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`pkey`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
 
 /*Data for the table `account` */
 
-insert  into `account`(`pkey`,`username`,`email`,`name`,`crypto`,`role`,`img`,`refkey`,`status`,`verification`,`verificationtime`,`password`) values 
-(1,'admin',NULL,'yayan','4754',1,'',NULL,1,NULL,'1655109344','0192023a7bbd73250516f069df18b500'),
-(5,'yayan1',NULL,'Guru','0',2,'',NULL,0,NULL,'1655109344','0192023a7bbd73250516f069df18b500'),
-(6,'yt',NULL,'yt','649543.7666438444',2,'','27',0,NULL,'1655109344','fa0ed5b5c600145bdd9a299952b99651'),
-(7,'admin',NULL,'admin','3280900',2,'','6',1,'3958','1655109344','21232f297a57a5a743894a0e4a801fc3'),
-(24,'ascasc','ascsc@mail.com','','6',2,'','1',1,'3958','1655109344','96f0f08c0188ba04898ce8cc465c19c4'),
-(25,'ascasca','scascac@mail.com','','0',2,'','24',1,'9937','1655114948','96f0f08c0188ba04898ce8cc465c19c4'),
-(26,'tttttt','tttttt@mail.com','','31176.589668493034',2,'','25',1,'3166','1655126500','bcc720f2981d1a68dbd66ffd67560c37'),
-(27,'yayan','yayan@mail.com','','63995094.53066884',2,'','26',1,'6411','1655132728','0192023a7bbd73250516f069df18b500');
+insert  into `account`(`pkey`,`username`,`phone`,`name`,`crypto`,`role`,`img`,`refkey`,`status`,`verification`,`verificationtime`,`password`) values 
+(0,'admin',NULL,'yayan','0.4',1,'',NULL,1,NULL,'1655109344','0192023a7bbd73250516f069df18b500'),
+(5,'yayan1',NULL,'Guru','1',2,'','0',0,NULL,'1655109344','0192023a7bbd73250516f069df18b500'),
+(41,'coba','6281532380661','','0',2,'','5',1,'2058','1663352794','c3ec0f7b054e729c5a716c8125839829'),
+(46,'ascascasca','scascasc','','0',2,'','41',0,'8982','1663353346','df3e6c4b0fbecc6ee25fe4d4867509b0'),
+(47,'testing','testing','','1.4',2,'','41',1,'8439','1663420221','ae2b1fca515949e5d54fb22b8ed95575'),
+(48,'coba123','coba123','','9980.1',2,'','47',1,'2330','1663429778','a3040f90cc20fa672fe31efcae41d2db'),
+(49,'yyyyyyyyyy','yyyyyyyyyy','','60.1',2,'','41',1,'5827','1663484158','0bbc18cdea1c4aaa17777d441214774a'),
+(50,'yuhu','yuhu','','1.01',2,'','41',1,'6940','1663783677','b7f68bb19bde0d7787e67053b4acd3b9');
 
 /*Table structure for table `claimtopup` */
 
@@ -146,7 +146,7 @@ CREATE TABLE `logs_farming` (
   `note` varchar(255) DEFAULT NULL,
   `time` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`pkey`)
-) ENGINE=InnoDB AUTO_INCREMENT=474 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=480 DEFAULT CHARSET=latin1;
 
 /*Data for the table `logs_farming` */
 
@@ -356,7 +356,31 @@ insert  into `logs_farming`(`pkey`,`refkey`,`targetkey`,`value`,`note`,`time`) v
 (470,7,7,'+40,000','Top Up','1659366972'),
 (471,7,7,'+40,000','Top Up','1659367453'),
 (472,7,7,'+40,000','Top Up','1659367527'),
-(473,7,7,'+40,000','Top Up','1659367555');
+(473,7,7,'+40,000','Top Up','1659367555'),
+(474,50,41,'-5','Admin Fee','1663785290'),
+(475,50,41,'-1','Send','1663785290'),
+(476,41,50,'+1','Receive','1663785290'),
+(477,50,41,'-0','Admin Fee','1663785316'),
+(478,50,41,'-1','Send','1663785316'),
+(479,41,50,'+1','Receive','1663785316');
+
+/*Table structure for table `month_fee` */
+
+DROP TABLE IF EXISTS `month_fee`;
+
+CREATE TABLE `month_fee` (
+  `pkey` int(11) NOT NULL AUTO_INCREMENT,
+  `range` int(11) DEFAULT NULL,
+  `fee` varchar(255) DEFAULT '0',
+  PRIMARY KEY (`pkey`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+/*Data for the table `month_fee` */
+
+insert  into `month_fee`(`pkey`,`range`,`fee`) values 
+(1,1,'3'),
+(2,2,'7.5'),
+(3,3,'12.5');
 
 /*Table structure for table `percentage_refferal` */
 
@@ -394,13 +418,38 @@ CREATE TABLE `profile_company` (
   `minimumwidraw` float DEFAULT '0',
   `referral` varchar(255) DEFAULT NULL,
   `contract` varbinary(255) DEFAULT NULL,
+  `feeactive` int(11) DEFAULT NULL,
+  `twig` int(11) DEFAULT NULL,
+  `onemonth` int(11) DEFAULT NULL,
   KEY `id` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `profile_company` */
 
-insert  into `profile_company`(`id`,`name`,`alamat`,`telepon`,`phone`,`titlelogin`,`logo`,`title`,`menutitle`,`walletAddress`,`cryptotransactionfee`,`minimumwidraw`,`referral`,`contract`) values 
-(1,'Crypto','testing','2345423','234532','Login Crypto','logo.png','Live','Live Streaming','0x5636b525dce4ddcd31ffe340f28b1e3ac668b009',5,1,'{\"1\":\"321\",\"2\":\"123\"}',0x307831306564343363373138373134656236336435616135376237386235343730346532353630323465);
+insert  into `profile_company`(`id`,`name`,`alamat`,`telepon`,`phone`,`titlelogin`,`logo`,`title`,`menutitle`,`walletAddress`,`cryptotransactionfee`,`minimumwidraw`,`referral`,`contract`,`feeactive`,`twig`,`onemonth`) values 
+(1,'Crypto','testing','2345423','234532','Login Crypto','logo.png','Live','Live Streaming','0xA54F619C274Af9E0efDCeF6cd909d74514Fba120',0,10,'{\"1\":\"321\",\"2\":\"123\"}',0x307831306564343363373138373134656236336435616135376237386235343730346532353630323465,10,2,1000);
+
+/*Table structure for table `range` */
+
+DROP TABLE IF EXISTS `range`;
+
+CREATE TABLE `range` (
+  `pkey` int(11) NOT NULL AUTO_INCREMENT,
+  `refkey` int(11) DEFAULT NULL,
+  `count` int(11) NOT NULL DEFAULT '0',
+  `date` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`pkey`,`count`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+
+/*Data for the table `range` */
+
+insert  into `range`(`pkey`,`refkey`,`count`,`date`) values 
+(1,5,2,'1661086799'),
+(9,41,1,'1655816535'),
+(10,47,1,'1661086799'),
+(11,48,3,'1661086799'),
+(12,49,4,'1661086799'),
+(13,50,0,'1663783677');
 
 /*Table structure for table `role` */
 

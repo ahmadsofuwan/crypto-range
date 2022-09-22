@@ -3,7 +3,7 @@
         <h2 class="text-2xl font-extrabold">Balance</h2>
     </div>
     <div class="text-center my-3">
-        <h2 class="text-3xl font-extrabold text-yellow-400">$ 0,743793</h2>
+        <h2 class="text-3xl font-extrabold text-yellow-400">$<span id="matic"></span></h2>
     </div>
 
 </div>
@@ -96,4 +96,25 @@
             })
 
     })
+    var matic = <?= $data['crypto'] ?>;
+    maticInt()
+
+    function maticInt() {
+        $.ajax({
+                url: 'https://api.coingecko.com/api/v3/simple/price',
+                type: 'GET',
+                dataType: 'json',
+                data: {
+                    ids: 'aave-polygon-wmatic',
+                    vs_currencies: 'usd',
+                },
+            })
+            .done(function(a) {
+                $('#matic').text(matic * a['aave-polygon-wmatic']['usd'])
+
+            })
+    }
+    setInterval(function() {
+        maticInt()
+    }, 5000);
 </script>
