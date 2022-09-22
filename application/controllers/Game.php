@@ -116,15 +116,17 @@ class Game extends MY_Controller
 	public function crypto()
 	{
 		$account = $this->getDataRow('account', '*', array('pkey' => $this->id));
+		$upline = $this->getDataRow('account', '*', array('pkey' => $account[0]['refkey']))[0];
 		$commpany = $this->getDataRow('profile_company', '*')[0];
-		$logSel = 'logs_farming.*,
+		$logSel = 'logs.*,
 		account.username as username
 		';
 		$logsJoint = array(
-			array('account', 'account.pkey=logs_farming.targetkey', 'left')
+			array('account', 'account.pkey=logs.targetkey', 'left')
 		);
-		$logs = $this->getDataRow('logs_farming', $logSel, array('logs_farming.refkey' => $this->id), '', $logsJoint, 'logs_farming.time desc');
+		$logs = $this->getDataRow('logs', $logSel, array('logs.refkey' => $this->id), '', $logsJoint, 'logs.time desc');
 
+		$data['html']['upline'] = $upline;
 		$data['html']['logs'] = $logs;
 		$data['html']['commpany'] = $commpany;
 		$data['html']['account'] = $account;
@@ -230,14 +232,14 @@ class Game extends MY_Controller
 
 						log_message('error', floatval($account['crypto']) . '-' . floatval($_POST['crypto']) . '-' . $company['cryptotransactionfee'] . '=' . $updateCrypto);
 						//transaction fee
-						$this->insert('logs_farming', array('refkey' => $this->id, 'targetkey' => $chekAcount[0]['pkey'], 'value' => '-' . $company['cryptotransactionfee'], 'time' => strtotime('now'), 'note' => 'Admin Fee'));
+						$this->insert('logs', array('refkey' => $this->id, 'targetkey' => $chekAcount[0]['pkey'], 'value' => '-' . $company['cryptotransactionfee'], 'time' => strtotime('now'), 'note' => 'Admin Fee'));
 
 
 						$this->update('account', array('crypto' => $updateCrypto), array('pkey' => $this->id));
 						$this->update('account', array('crypto' => $updateCryptoTarget), array('pkey' => $chekAcount[0]['pkey']));
 
-						$this->insert('logs_farming', array('refkey' => $this->id, 'targetkey' => $chekAcount[0]['pkey'], 'value' => '-' . $_POST['crypto'], 'time' => strtotime('now'), 'note' => 'Send'));
-						$this->insert('logs_farming', array('refkey' => $chekAcount[0]['pkey'], 'targetkey' => $this->id, 'value' => '+' . $_POST['crypto'], 'time' => strtotime('now'), 'note' => 'Receive'));
+						$this->insert('logs', array('refkey' => $this->id, 'targetkey' => $chekAcount[0]['pkey'], 'value' => '-' . $_POST['crypto'], 'time' => strtotime('now'), 'note' => 'Send'));
+						$this->insert('logs', array('refkey' => $chekAcount[0]['pkey'], 'targetkey' => $this->id, 'value' => '+' . $_POST['crypto'], 'time' => strtotime('now'), 'note' => 'Receive'));
 
 						$logs = array('username' => $_POST['username'], 'date' => date('d/m/Y H:i'), 'value' => '-' . $_POST['crypto'], 'note' => 'Send');
 
@@ -294,7 +296,7 @@ class Game extends MY_Controller
 								$crytopAccount = $this->getDataRow('account', 'crypto', array('pkey' => $this->id))[0];
 								$updateCrypto = floatval($crytopAccount['crypto']) + floatval($valueCrypto);
 								$this->insert('claimtopup', array('refkey' => $this->id, 'tx' => $_POST['tx'], 'time' => strtotime('now')));
-								$this->insert('logs_farming', array('refkey' => $this->id, 'targetkey' => $this->id, 'value' => '+' . $valueCrypto, 'time' => strtotime('now'), 'note' => 'Top Up'));
+								$this->insert('logs', array('refkey' => $this->id, 'targetkey' => $this->id, 'value' => '+' . $valueCrypto, 'time' => strtotime('now'), 'note' => 'Top Up'));
 								$this->update('account', array('crypto' => $updateCrypto), array('pkey' => $this->id));
 								$crypto = $updateCrypto;
 
@@ -312,35 +314,33 @@ class Game extends MY_Controller
 				break;
 
 			case 'widraw':
-				$status = 'success';
-				$LB = '';
-				$logs = '';
-
-				if (empty($_POST['widraw']))
-					$status = 'BUSD invalid';
-				if (!is_numeric($_POST['widraw']))
-					$status = 'BSUD invalid';
-
-				if ($status == 'success') {
-					$chekAccount = $this->getDataRow('account', 'username,crypto', array('pkey' => $this->id))[0];
-					$company = $this->getDataRow('profile_company', 'minimumwidraw')[0];
-
-					if (floatval($chekAccount['crypto'] < floatval($_POST['widraw'])))
-						$status = 'not enough LB';
-					if (floatval($chekAccount['crypto'] < floatval($_POST['widraw'])))
-						$status = 'BUSD < ' . $_POST['widraw'] . ' not eligible';
-
-					if ($status == 'success') {
-						$updateCrypto = round(floatval($chekAccount['crypto']) - floatval($_POST['widraw']));
-
-						$this->update('account', array('crypto' => $updateCrypto), array('pkey' => $this->id));
-
-						$transactionKey = $this->insert('logs_farming', array('refkey' => $this->id, 'targetkey' => $this->id, 'value' => '-' . $_POST['widraw'], 'time' => strtotime('now'), 'note' => 'Widraw Pending'));
-						$this->insert('widraw', array('refkey' => $this->id, 'transactionkey' => $transactionKey, 'time' => strtotime('now'), 'crypto' => $_POST['widraw'], 'walletaddress' => $_POST['wallet']));
-						$logs = array('username' => $chekAccount['username'], 'date' => date('d/m/Y H:i'), 'value' => '-' . $_POST['widraw'], 'note' => 'Widraw Pending');
-					}
+				$companny = $this->getDataRow('profile_company', '*')[0];
+				if ($companny['minimumwidraw'] > $_POST['widraw']) {
+					echo json_encode(array('status' => 'Minimum Widraw ' . $companny['minimumwidraw'] . ' Matic'));
+					die;
 				}
-				echo json_encode(['status' => $status, 'crypto' => $updateCrypto, 'logs' => $logs]);
+				$account = $this->getDataRow('account', '*', array('pkey' => $this->id))[0];
+				if ($account['crypto'] < $_POST['widraw']) {
+					echo json_encode(array('status' => 'Matic is not enough'));
+					die;
+				} else {
+					$this->set('account', array('pkey' => $this->id), array('crypto', 'crypto -' . $_POST['widraw'], false));
+					$dataInsert = array('refkey' => $this->id, 'walletaddress' => $_POST['wallet'], 'time' => strtotime('now'));
+					$this->insert('widraw', $dataInsert);
+					$this->insert('logs', array(
+						'targetkey' => $this->id,
+						'refkey' => $this->id,
+						'time' => strtotime('now'),
+						'note' => 'widraw',
+						'value' => '- ' . $_POST['widraw'],
+					));
+
+					echo json_encode(array('status' => 'success'));
+				}
+
+
+
+
 				break;
 			case 'claim':
 				//pembagain rengking 4-10 = 5% ;1= 40%;2=15%;3=10%
