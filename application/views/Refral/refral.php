@@ -42,7 +42,7 @@
                             <div class="col-lg">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="text-2xl mb-4 text-orange-400 font-extrabold">Register</h1>
+                                        <h1 class="text-2xl mb-4 text-orange-400 font-extrabold">Register Now !!!</h1>
                                     </div>
                                     <form class="user" method="POST" action="<?= base_url('Refral/register') ?>">
                                         <div class="form-group">
@@ -55,7 +55,7 @@
                                             <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Password">
                                         </div>
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user" name="refral" placeholder="refral" value="<?php echo $ref ?>">
+                                            <input type="text" class="form-control form-control-user" name="refral" placeholder="Referral" value="<?php echo $ref ?>">
                                         </div>
                                         <button class="btn btn-primary btn-user btn-block" type="submit">Register</button>
                                     </form>

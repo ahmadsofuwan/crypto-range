@@ -55,7 +55,9 @@
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Password">
-                                            <small class="mt-3"><a href="<?php echo base_url('Refral') ?>">Register</a></small>
+                                        </div>
+                                        <div class="form-group">
+                                            <span class="text-salte-300">Forgot Password</span>
                                         </div>
                                         <button class="btn btn-primary btn-user btn-block" type="submit">Login</button>
                                     </form>

@@ -68,7 +68,7 @@ class Game extends MY_Controller
 			} else {
 				$reff = $this->getDataRow('account', 'phone', array('pkey' => $account['refkey']))[0];
 				$this->session->set_flashdata('nonActive', true);
-				$this->session->set_flashdata('msg', 'your account is not active, Burn ' . $commpany['feeactive'] . ' Matic for Active!');
+				$this->session->set_flashdata('msg', 'your account is not active, Burn ' . $commpany['feeactive'] . ' Matic for Activate!');
 				$this->session->set_flashdata('reff', '<a href="https://wa.me/' . $reff['phone'] . '" target="_blank">WhastApp Upline</a>');
 			}
 		}

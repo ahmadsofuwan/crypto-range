@@ -21,9 +21,9 @@ class Refral extends MY_Controller
 		$cekusername = $this->getDataRow('account', 'username,pkey', array('username' => $this->input->post('username')));
 		$refral = $this->getDataRow('account', 'pkey', array('username' => $this->input->post('refral'), 'role' => 2, 'status' => 1))[0]['pkey'];
 		if (!empty(count($cekusername)) || empty($refral)) {
-			$this->session->set_flashdata('msg', 'Username Telah di gunakan');
+			$this->session->set_flashdata('msg', 'Username Already in use');
 			if (empty($refral))
-				$this->session->set_flashdata('msg', 'Refral Tidak di temukan');
+				$this->session->set_flashdata('msg', 'Referral Not found');
 
 			$this->session->set_flashdata('post', $_POST);
 			redirect(base_url('Refral/shere'));

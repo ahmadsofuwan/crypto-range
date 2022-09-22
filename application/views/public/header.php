@@ -28,13 +28,13 @@
 </style>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark text-4xl uppercase">
         <div class="container-fluid">
             <div class="navbar-brand ">
                 <a href="<?php echo base_url('Game/crypto') ?>" class="flex">
                     <img src="<?php echo base_url('asset/public/img/') ?>usdt.png" alt="Logo" class="w-14">
                     <!-- <span class="ml-2 font-semibold" id="crypto"><?php echo number_format($account['crypto']) ?></span> -->
-                    <span class="ml-2 font-semibold my-auto" id="crypto">Wallet</span>
+                    <span class="ml-2 font-semibold my-auto text-4xl" id="crypto">Wallet</span>
                 </a>
             </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,10 +46,10 @@
                         <a class="nav-link <?php echo isset($nav) && $nav == 'home' ? 'active' : '' ?>" aria-current="page" href="<?php echo base_url() ?>">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php echo isset($nav) && $nav == 'range' ? 'active' : '' ?>" href="<?php echo base_url('Game/range') ?>">POOL</a>
+                        <a class="nav-link <?php echo isset($nav) && $nav == 'range' ? 'active' : '' ?>" href="<?php echo base_url('Game/range') ?>">POOLS</a>
                     </li>
                     <li class=" nav-item">
-                        <a class="nav-link" href="<?php echo base_url('Auth/logout') ?>">LogOut</a>
+                        <a class="nav-link" href="<?php echo base_url('Auth/logout') ?>">exit</a>
                     </li>
                 </ul>
             </div>
