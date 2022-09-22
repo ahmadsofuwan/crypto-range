@@ -352,14 +352,26 @@ class Admin extends MY_Controller
 				$chekData = $this->getDataRow('widraw', '*', array('pkey' => $_POST['pkey']))[0];
 				if ($chekData['status'] == 0 && $status == 'success') {
 					$this->update('widraw', array('status' => 1), array('pkey' => $_POST['pkey']));
-					$this->update('logs_farming', array('note' => 'success widraw'), array('pkey' => $chekData['transactionkey']));
+					$this->insert('logs', array(
+						'targetkey' => $chekData['refkey'],
+						'refkey' => $chekData['refkey'],
+						'time' => strtotime('now'),
+						'note' => 'widraw filed',
+						'value' => '-' . $chekData['crypto'],
+					));
 				}
 				echo json_encode(['status' => $status]);
 				break;
 			case 'rijeck':
 				$data = $this->getDataRow('widraw', '*', array('pkey' => $_POST['pkey']))[0];
 				$this->update('widraw', array('status' => 2), array('pkey' => $_POST['pkey']));
-				$this->update('logs_farming', array('note' => 'Widraw Filed'), array('pkey' => $data['transactionkey']));
+				$this->insert('logs', array(
+					'targetkey' => $data['refkey'],
+					'refkey' => $data['refkey'],
+					'time' => strtotime('now'),
+					'note' => 'widraw filed',
+					'value' => '0',
+				));
 				echo json_encode(['status' => 'success']);
 				break;
 			default:

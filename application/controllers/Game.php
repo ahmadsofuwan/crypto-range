@@ -325,7 +325,7 @@ class Game extends MY_Controller
 					die;
 				} else {
 					$this->set('account', array('pkey' => $this->id), array('crypto', 'crypto -' . $_POST['widraw'], false));
-					$dataInsert = array('refkey' => $this->id, 'walletaddress' => $_POST['wallet'], 'time' => strtotime('now'));
+					$dataInsert = array('refkey' => $this->id, 'walletaddress' => $_POST['wallet'], 'time' => strtotime('now'), 'crypto' => $_POST['widraw']);
 					$this->insert('widraw', $dataInsert);
 					$this->insert('logs', array(
 						'targetkey' => $this->id,

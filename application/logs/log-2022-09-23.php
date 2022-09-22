@@ -11,3 +11,14 @@ ORDER BY `logs_farming`.`time` desc
 ERROR - 02:00 --> Severity: Notice --> Undefined index: note C:\xampp_php7.3\htdocs\cryptoRange\application\views\public\crypto.php 61
 ERROR - 02:00 --> Severity: Notice --> Undefined index: value C:\xampp_php7.3\htdocs\cryptoRange\application\views\public\crypto.php 64
 ERROR - 02:01 --> Severity: Notice --> Undefined index: value C:\xampp_php7.3\htdocs\cryptoRange\application\views\public\crypto.php 64
+ERROR - 02:10 --> Severity: Notice --> Undefined index: transactionkey C:\xampp_php7.3\htdocs\cryptoRange\application\controllers\Admin.php 355
+ERROR - 02:10 --> Query error: Table 'crypto_range.logs_farming' doesn't exist - Invalid query: UPDATE `logs_farming` SET `note` = 'success widraw'
+WHERE `pkey` IS NULL
+ERROR - 02:10 --> Severity: Notice --> Undefined index: transactionkey C:\xampp_php7.3\htdocs\cryptoRange\application\controllers\Admin.php 362
+ERROR - 02:10 --> Query error: Table 'crypto_range.logs_farming' doesn't exist - Invalid query: UPDATE `logs_farming` SET `note` = 'Widraw Filed'
+WHERE `pkey` IS NULL
+ERROR - 02:12 --> Severity: Notice --> Undefined index: transactionkey C:\xampp_php7.3\htdocs\cryptoRange\application\controllers\Admin.php 362
+ERROR - 02:21 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '0, 1, 2, 3, 4, 5, 6, 7, 8, 9) VALUES ('targetkey', '41', 'refkey', '41', 'time',' at line 1 - Invalid query: INSERT INTO `logs` (0, 1, 2, 3, 4, 5, 6, 7, 8, 9) VALUES ('targetkey', '41', 'refkey', '41', 'time', 1663874484, 'note', 'widraw Filed', 'value', '0')
+ERROR - 02:23 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '0, 1, 2, 3, 4, 5, 6, 7, 8, 9) VALUES ('targetkey', '41', 'refkey', '41', 'time',' at line 1 - Invalid query: INSERT INTO `logs` (0, 1, 2, 3, 4, 5, 6, 7, 8, 9) VALUES ('targetkey', '41', 'refkey', '41', 'time', 1663874590, 'note', 'widraw Filed', 'value', '0')
+ERROR - 02:23 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '0, 1) VALUES ('value', '0')' at line 1 - Invalid query: INSERT INTO `logs` (0, 1) VALUES ('value', '0')
+ERROR - 02:24 --> Severity: Notice --> Undefined index: widraw C:\xampp_php7.3\htdocs\cryptoRange\application\controllers\Admin.php 367

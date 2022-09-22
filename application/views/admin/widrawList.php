@@ -7,7 +7,7 @@
     <thead class="bg-primary text-white">
         <tr>
             <th scope="col">Username</th>
-            <th scope="col">BUSD</th>
+            <th scope="col">MATIC</th>
             <th scope="col">Wallet</th>
             <th scope="col">Waktu</th>
             <th scope="col">Status</th>
