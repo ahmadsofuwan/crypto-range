@@ -1,0 +1,26 @@
+.caption{
+    border-top: 3px solid;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+
+  @keyframes glowing {
+    0% {
+      background-color: #6aa805;
+      box-shadow: 0 0 5px #90a805;
+    }
+    50% {
+      background-color: #e8b819;
+      box-shadow: 0 0 20px #e8da19;
+    }
+    100% {
+      background-color: #a84105;
+      box-shadow: 0 0 5px #a86105;  
+    }
+  }
+  .blink {
+    animation: glowing 1300ms infinite;
+  }
+
+
