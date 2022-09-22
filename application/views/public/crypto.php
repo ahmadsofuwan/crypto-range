@@ -89,7 +89,7 @@
     }
     $('#cryptoSend').click(function() {
         var elemnt = '<div><input type="text" id="userTarget" class="swal2-input" placeholder="Username"></div>';
-        elemnt += '<div><input type="number" id="cryptoPopUp" class="swal2-input" placeholder="Total Matic"></div>';
+        elemnt += '<div><input type="number" id="cryptoPopUp" class="swal2-input" placeholder="Amount Matic"></div>';
         Swal.fire({
             title: '<div>Matic Balance <br> ' + baseCrypto + '<div>',
             html: elemnt,
@@ -174,6 +174,8 @@
         })
     })
     $('#cryptoClaim').click(function() {
+        Swal.fire('Comming Soon')
+        return
         var elemnt = '<div>Polygon Network</div><div><?= $commpany['walletAddress'] ?><button onclick="copyToClipboard()" class="ml-2"><svg class="w-6 h-6" fill="#9ca3af" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M7 9a2 2 0 012-2h6a2 2 0 012 2v6a2 2 0 01-2 2H9a2 2 0 01-2-2V9z"></path><path d="M5 3a2 2 0 00-2 2v6a2 2 0 002 2V5h8a2 2 0 00-2-2H5z"></path></svg></button></div><div><input type="text" id="tx" class="swal2-input" placeholder="Tx ID"></div>';
         Swal.fire({
             title: 'Transaction Detail',
@@ -251,8 +253,8 @@
         })
     })
     $('#criptoWidraw').click(function() {
-        var elemnt = '<div><input type="number" id="widrawVal" class="swal2-input" placeholder="Withdraw" value="" min=""></div>';
-        elemnt += '<div><input type="text" id="wallet" class="swal2-input" placeholder="Address Wallet"></div>';
+        var elemnt = '<div><input type="number" id="widrawVal" class="swal2-input" placeholder="Amount Matic" value="" min=""></div>';
+        elemnt += '<div><input type="text" id="wallet" class="swal2-input" placeholder="Address Wallet (Polygon)"></div>';
         Swal.fire({
             title: '<div>Withdraw <div>',
             html: elemnt,

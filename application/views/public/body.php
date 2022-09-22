@@ -10,7 +10,7 @@
 <div class="mx-5 my-y p-5 bg-blue-900 rounded-3xl gradient-border mt-5 opacity-95 text-slate-300">
     <div class="text-center">
         <span class="text-2xl font-extrabold"><?= $data['username'] ?></span>
-        <h2 class="text-2xl font-extrabold">Total Network</h2>
+        <h2 class="text-2xl font-extrabold">Total Networks</h2>
         <a class="text-green-500 font-extrabold text-3xl" id="refral">
             Copy Refferal
             <input type="text" id="refralLink" style="display: none;" value="<?= base_url('Refral/shere/' . $this->username) ?>">
