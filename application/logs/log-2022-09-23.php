@@ -22,3 +22,6 @@ ERROR - 02:21 --> Query error: You have an error in your SQL syntax; check the m
 ERROR - 02:23 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '0, 1, 2, 3, 4, 5, 6, 7, 8, 9) VALUES ('targetkey', '41', 'refkey', '41', 'time',' at line 1 - Invalid query: INSERT INTO `logs` (0, 1, 2, 3, 4, 5, 6, 7, 8, 9) VALUES ('targetkey', '41', 'refkey', '41', 'time', 1663874590, 'note', 'widraw Filed', 'value', '0')
 ERROR - 02:23 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '0, 1) VALUES ('value', '0')' at line 1 - Invalid query: INSERT INTO `logs` (0, 1) VALUES ('value', '0')
 ERROR - 02:24 --> Severity: Notice --> Undefined index: widraw C:\xampp_php7.3\htdocs\cryptoRange\application\controllers\Admin.php 367
+ERROR - 04:38 --> Severity: Notice --> Undefined offset: 1 C:\xampp_php7.3\htdocs\cryptoRange\application\controllers\Game.php 43
+ERROR - 04:41 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp_php7.3\htdocs\cryptoRange\application\controllers\Game.php 45
+ERROR - 23:17 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp_php7.3\htdocs\cryptoRange\application\controllers\Game.php 45

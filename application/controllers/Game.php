@@ -13,43 +13,7 @@ class Game extends MY_Controller
 			redirect(base_url('Auth'));
 		}
 		$this->limitRange = 10;
-
-		$this->oneMonthFee = array(
-			1000,
-			900,
-			800,
-			700,
-			600,
-			500,
-			400,
-			300,
-			200,
-			100,
-		);
-		$this->twoMonthFee = array(
-			1000,
-			900,
-			800,
-			700,
-			600,
-			500,
-			400,
-			300,
-			200,
-			100,
-		);
-		$this->threeMonthFee = array(
-			1000,
-			900,
-			800,
-			700,
-			600,
-			500,
-			400,
-			300,
-			200,
-			100,
-		);
+		$this->limitLevel = 9;
 	}
 
 	public function index()
@@ -74,6 +38,16 @@ class Game extends MY_Controller
 		}
 
 		$data = $this->getDataRow('account', '*', array('pkey' => $this->id))[0];
+
+
+		$follower = $this->follower($this->id);
+		// $levelFollower = array();
+		// foreach ($this->limitLevel as $key => $value) {
+
+		// }
+
+		// // echo isset($levelFollower['level'][2]);
+		// print_r($follower);
 
 		$data['html']['reff'] = $this->follower($this->id);
 		$data['html']['data'] = $data;
@@ -164,7 +138,6 @@ class Game extends MY_Controller
 		}
 	}
 
-
 	private function follower($pkeys)
 	{
 		$companny = $this->getDataRow('profile_company', 'twig', array('id' => 1))[0];
@@ -190,7 +163,6 @@ class Game extends MY_Controller
 		return $result;
 	}
 
-
 	public function ajax()
 	{
 		switch ($_POST['action']) {
@@ -208,109 +180,9 @@ class Game extends MY_Controller
 				echo json_encode(array('status' => $status, 'crypto' => number_format(round($updatecrypto, 2))));
 				break;
 			case 'sendCrypto':
-				$status = 'success';
-				$crypto = '';
-				$logs = '';
-				$chekAcount = $this->getDataRow('account', 'pkey,crypto', array('username' => $_POST['username']));
-				$company = $this->getDataRow('profile_company', 'cryptotransactionfee')[0];
-
-				if (count($chekAcount) <> 1 || $chekAcount[0]['pkey'] == $this->id)
-					$status = 'username not found';
-				if (empty($_POST['crypto']))
-					$status = 'Crypto invalid';
-				if (!is_numeric($_POST['crypto']))
-					$status = 'Crypto invalid';
-
-				//cek saldo crypto dan transfer
-				if ($status == 'success') {
-					$account = $this->getDataRow('account', 'crypto', array('pkey' => $this->id))[0];
-					if ($account['crypto'] < floatval($_POST['crypto'] + $company['cryptotransactionfee'])) {
-						$status = 'not enough crypto';
-					} else {
-						$updateCrypto = $account['crypto'] - $_POST['crypto'] - $company['cryptotransactionfee'];
-						$updateCryptoTarget = floatval($chekAcount[0]['crypto']) + floatval($_POST['crypto']);
-
-						log_message('error', floatval($account['crypto']) . '-' . floatval($_POST['crypto']) . '-' . $company['cryptotransactionfee'] . '=' . $updateCrypto);
-						//transaction fee
-						$this->insert('logs', array('refkey' => $this->id, 'targetkey' => $chekAcount[0]['pkey'], 'value' => '-' . $company['cryptotransactionfee'], 'time' => strtotime('now'), 'note' => 'Admin Fee'));
-
-
-						$this->update('account', array('crypto' => $updateCrypto), array('pkey' => $this->id));
-						$this->update('account', array('crypto' => $updateCryptoTarget), array('pkey' => $chekAcount[0]['pkey']));
-
-						$this->insert('logs', array('refkey' => $this->id, 'targetkey' => $chekAcount[0]['pkey'], 'value' => '-' . $_POST['crypto'], 'time' => strtotime('now'), 'note' => 'Send'));
-						$this->insert('logs', array('refkey' => $chekAcount[0]['pkey'], 'targetkey' => $this->id, 'value' => '+' . $_POST['crypto'], 'time' => strtotime('now'), 'note' => 'Receive'));
-
-						$logs = array('username' => $_POST['username'], 'date' => date('d/m/Y H:i'), 'value' => '-' . $_POST['crypto'], 'note' => 'Send');
-
-						$crypto = $updateCrypto;
-					}
-				}
-				echo json_encode(['status' => $status, 'crypto' => $crypto, 'logs' => $logs, 'adminFee' => '-' . $company['cryptotransactionfee']]);
+				echo json_encode($_POST);
 				break;
 			case 'cryptoClaim';
-				$status = 'success';
-				$crypto = '';
-				$logs = '';
-
-				//cek tx Code
-				if ($status == 'success') {
-					$chekTxCode = $this->getDataRow('claimtopup', 'pkey', array('tx' => $_POST['tx']));
-					if (count($chekTxCode) <> 0) {
-						$status = 'txt code already used';
-					} else {
-						$tx = $_POST['tx'];
-						$curl = curl_init();
-
-						curl_setopt_array($curl, array(
-							CURLOPT_URL => 'localhost:3000/tx',
-							CURLOPT_RETURNTRANSFER => true,
-							CURLOPT_ENCODING => '',
-							CURLOPT_MAXREDIRS => 10,
-							CURLOPT_TIMEOUT => 0,
-							CURLOPT_FOLLOWLOCATION => true,
-							CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-							CURLOPT_CUSTOMREQUEST => 'POST',
-							CURLOPT_POSTFIELDS => 'tx=' . $tx,
-							CURLOPT_HTTPHEADER => array(
-								'Content-Type: application/x-www-form-urlencoded'
-							),
-						));
-
-						$response = json_decode(curl_exec($curl));
-						curl_close($curl);
-						$response = $response->data;
-
-
-						if ($response->status == 'error' || empty($response->status)) {
-							$status = 'tx invalid';
-						} else {
-							$txAddress = $this->getDataRow('profile_company', 'walletAddress,contract')[0];
-
-							if ($txAddress['walletAddress'] <> $response->from)
-								$status = 'Crypto Address invalid';
-							if ($txAddress['contract'] <> $response->contract)
-								$status = 'Coint invalid';
-							if ($status == 'success') {
-								$valueCrypto = explode(" ", $response->value)[0];
-								$crytopAccount = $this->getDataRow('account', 'crypto', array('pkey' => $this->id))[0];
-								$updateCrypto = floatval($crytopAccount['crypto']) + floatval($valueCrypto);
-								$this->insert('claimtopup', array('refkey' => $this->id, 'tx' => $_POST['tx'], 'time' => strtotime('now')));
-								$this->insert('logs', array('refkey' => $this->id, 'targetkey' => $this->id, 'value' => '+' . $valueCrypto, 'time' => strtotime('now'), 'note' => 'Top Up'));
-								$this->update('account', array('crypto' => $updateCrypto), array('pkey' => $this->id));
-								$crypto = $updateCrypto;
-
-								$account = $this->getDataRow('account', 'username', array('pkey' => $this->id))[0];
-
-								$logs = array('username' => $account['username'], 'date' => date('d/m/Y H:i'), 'value' => '+' . $valueCrypto, 'note' => 'Top Up');
-							}
-						}
-					}
-				}
-
-
-
-				echo json_encode(['status' => $status, 'crypto' => $crypto, 'logs' => $logs]);
 				break;
 
 			case 'widraw':
@@ -358,46 +230,6 @@ class Game extends MY_Controller
 					$this->update('month_fee', array('fee' => 0), array('range' => $_POST['target']));
 					echo json_encode(array('status' => 'success'));
 				}
-
-
-				// switch ($_POST['target']) {
-				// 	case '1':
-				// 		$rangeOne = $this->getDataRow('range', '*', array('date <=' => strtotime('-1 month')), $this->limitRange, '', 'range.count desc');
-				// 		$oneMonthFee = $this->getDataRow('month_fee', 'fee', array('range' => 1))[0]['fee'];
-				// 		if ($rangeOne[0]['refkey'] == $this->id) {
-				// 			foreach ($rangeOne as $key => $value) {
-				// 				$fee = $oneMonthFee / 100;
-				// 				$fee = $fee * $percentageFee[$key];
-				// 				$this->set('account', array('pkey' => $value['refkey']), array('crypto', 'crypto +' . $fee, false));
-				// 				$this->update('range', array('count' => 0, 'date' => strtotime('now')), array('refkey' => $value['refkey']));
-				// 			}
-				// 			echo json_encode(array('status' => 'success'));
-				// 		}
-				// 		break;
-				// 	case '2':
-				// 		$rangeTwo = $this->getDataRow('range', '*', array('date <=' => strtotime('-2 month')), $this->limitRange, '', 'range.count desc');
-				// 		$oneMonthFee = $this->getDataRow('month_fee', 'fee', array('range' => 2))[0]['fee'];
-
-				// 		if ($rangeTwo[0]['refkey'] == $this->id) {
-
-				// 			foreach ($rangeTwo as $key => $value) {
-				// 				$this->set('account', array('pkey' => $value['refkey']), array('crypto', 'crypto +' . $this->twoMonthFee[$key], false));
-				// 				$this->update('range', array('count' => 0, 'date' => strtotime('now')), array('refkey' => $value['refkey']));
-				// 			}
-				// 			echo json_encode(array('status' => 'success'));
-				// 		}
-				// 		break;
-				// 	case '3':
-				// 		$rangeThree = $this->getDataRow('range', '*', array('date <=' => strtotime('-3 month')), $this->limitRange, '', 'range.count desc');
-				// 		if ($rangeThree[0]['refkey'] == $this->id) {
-				// 			foreach ($rangeThree as $key => $value) {
-				// 				$this->set('account', array('pkey' => $value['refkey']), array('crypto', 'crypto +' . $this->threeMonthFee[$key], false));
-				// 				$this->update('range', array('count' => 0, 'date' => strtotime('now')), array('refkey' => $value['refkey']));
-				// 			}
-				// 			echo json_encode(array('status' => 'success'));
-				// 		}
-				// 		break;
-				// }
 				break;
 			default:
 				echo json_encode(array('status' => 'nothing Action'));
