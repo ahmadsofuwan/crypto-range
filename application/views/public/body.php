@@ -56,7 +56,7 @@
             allowOutsideClick: false,
             showConfirmButton: false,
             text: '<?= $this->session->flashdata('msg') ?>',
-            footer: '<a class="font-bold text-sky-400" href="<?= base_url('Game/crypto') ?>">P2P Matic</a> <span class="ml-auto font-bold text-sky-400"><?= $this->session->flashdata('reff') ?></span>',
+            footer: '<a class="font-bold text-green-500" href="<?= base_url('Game/crypto') ?>">WALLET</a> <span class="ml-auto font-bold text-green-500"><?= $this->session->flashdata('reff') ?></span>',
         })
     <?php } ?>
 
