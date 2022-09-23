@@ -46,7 +46,10 @@
                         <a class="nav-link <?php echo isset($nav) && $nav == 'home' ? 'active' : '' ?>" aria-current="page" href="<?php echo base_url() ?>">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php echo isset($nav) && $nav == 'range' ? 'active' : '' ?>" href="<?php echo base_url('Game/range') ?>">POOLS</a>
+                        <a class="nav-link <?php echo isset($nav) && $nav == 'range' ? 'active' : '' ?>" href="<?php echo base_url('Game/range') ?>">N-POOLS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo isset($nav) && $nav == 'gpols' ? 'active' : '' ?>" href="<?php echo base_url('Game/range') ?>">G-POOLS</a>
                     </li>
                     <li class=" nav-item">
                         <a class="nav-link" href="<?php echo base_url('Auth/logout') ?>">exit</a>

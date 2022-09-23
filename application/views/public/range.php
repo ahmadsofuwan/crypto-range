@@ -4,11 +4,12 @@
             <svg style="width:24px;height:24px" class="animate-spin" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M12,2.6L9,12.4L2,19.9L12,17.6L22,20L15,12.5L12,2.6Z" />
             </svg>
-            <span class="mx-5">POOLS</span>
+            <span class="mx-5">NETWORK POOLS</span>
             <svg style="width:24px;height:24px" class="animate-spin" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M12,2.6L9,12.4L2,19.9L12,17.6L22,20L15,12.5L12,2.6Z" />
             </svg>
         </h2>
+        <h2 class="text-xl text-yellow-500 font-extrabold flex justify-content-center"> <span class="mx-5">TOP RANK 1-10</span></h2>
     </div>
     <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 xl:grid-cols-3 gap-2 mt-5">
         <div class="grid grid-cols-1 gap-2 mt-5 h-fit">

@@ -25,3 +25,25 @@ ERROR - 02:24 --> Severity: Notice --> Undefined index: widraw C:\xampp_php7.3\h
 ERROR - 04:38 --> Severity: Notice --> Undefined offset: 1 C:\xampp_php7.3\htdocs\cryptoRange\application\controllers\Game.php 43
 ERROR - 04:41 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp_php7.3\htdocs\cryptoRange\application\controllers\Game.php 45
 ERROR - 23:17 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp_php7.3\htdocs\cryptoRange\application\controllers\Game.php 45
+ERROR - 23:50 --> Severity: Notice --> Undefined offset: 0 C:\xampp_php7.3\htdocs\cryptoRange\application\controllers\Game.php 21
+ERROR - 23:50 --> Severity: Notice --> Undefined offset: 0 C:\xampp_php7.3\htdocs\cryptoRange\application\controllers\Game.php 33
+ERROR - 23:50 --> Severity: Notice --> Undefined offset: 0 C:\xampp_php7.3\htdocs\cryptoRange\application\controllers\Game.php 40
+ERROR - 23:50 --> Severity: Notice --> Undefined offset: 0 C:\xampp_php7.3\htdocs\cryptoRange\application\core\MY_Controller.php 33
+ERROR - 23:50 --> Severity: Notice --> Undefined index: username C:\xampp_php7.3\htdocs\cryptoRange\application\views\public\body.php 12
+ERROR - 23:50 --> Severity: Notice --> Undefined index: crypto C:\xampp_php7.3\htdocs\cryptoRange\application\views\public\body.php 104
+ERROR - 23:51 --> Severity: Notice --> Undefined offset: 0 C:\xampp_php7.3\htdocs\cryptoRange\application\controllers\Game.php 21
+ERROR - 23:51 --> Severity: Notice --> Undefined offset: 0 C:\xampp_php7.3\htdocs\cryptoRange\application\controllers\Game.php 33
+ERROR - 23:51 --> Severity: Notice --> Undefined offset: 0 C:\xampp_php7.3\htdocs\cryptoRange\application\controllers\Game.php 40
+ERROR - 23:51 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp_php7.3\htdocs\cryptoRange\application\controllers\Game.php 45
+ERROR - 23:51 --> Severity: Notice --> Undefined offset: 0 C:\xampp_php7.3\htdocs\cryptoRange\application\core\MY_Controller.php 33
+ERROR - 23:51 --> Severity: Notice --> Undefined index: username C:\xampp_php7.3\htdocs\cryptoRange\application\views\public\body.php 12
+ERROR - 23:51 --> Severity: Notice --> Undefined index: crypto C:\xampp_php7.3\htdocs\cryptoRange\application\views\public\body.php 104
+ERROR - 23:51 --> Severity: Notice --> Undefined offset: 0 C:\xampp_php7.3\htdocs\cryptoRange\application\controllers\Game.php 21
+ERROR - 23:51 --> Severity: Notice --> Undefined offset: 0 C:\xampp_php7.3\htdocs\cryptoRange\application\controllers\Game.php 33
+ERROR - 23:51 --> Severity: Notice --> Undefined offset: 0 C:\xampp_php7.3\htdocs\cryptoRange\application\controllers\Game.php 40
+ERROR - 23:51 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp_php7.3\htdocs\cryptoRange\application\controllers\Game.php 45
+ERROR - 23:51 --> Severity: Notice --> Undefined offset: 0 C:\xampp_php7.3\htdocs\cryptoRange\application\core\MY_Controller.php 33
+ERROR - 23:51 --> Severity: Notice --> Undefined index: username C:\xampp_php7.3\htdocs\cryptoRange\application\views\public\body.php 12
+ERROR - 23:51 --> Severity: Notice --> Undefined index: crypto C:\xampp_php7.3\htdocs\cryptoRange\application\views\public\body.php 104
+ERROR - 23:51 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp_php7.3\htdocs\cryptoRange\application\controllers\Game.php 45
+ERROR - 23:52 --> Severity: Warning --> Invalid argument supplied for foreach() C:\xampp_php7.3\htdocs\cryptoRange\application\controllers\Game.php 45

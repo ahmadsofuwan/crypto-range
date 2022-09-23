@@ -41,12 +41,11 @@ class Game extends MY_Controller
 
 
 		$follower = $this->follower($this->id);
-		// $levelFollower = array();
+		$levelFollower = array();
 		// foreach ($this->limitLevel as $key => $value) {
-
 		// }
 
-		// // echo isset($levelFollower['level'][2]);
+		echo isset($levelFollower['level'][2]);
 		// print_r($follower);
 
 		$data['html']['reff'] = $this->follower($this->id);
@@ -116,7 +115,7 @@ class Game extends MY_Controller
 
 		//pembagain rengking 4-10 = 5% ;1= 40%;2=15%;3=10%
 		$compaleteRef = 6;
-		$reffFee = [30, 5, 5, 2, 2, 2, 2, 1, 1];
+		$reffFee = [30, 3, 3, 2, 2, 2, 2, 1, 1];
 		$pkey = $this->id;
 		$percentFee = $fee / 100;
 		foreach ($reffFee as $value) {
@@ -131,7 +130,7 @@ class Game extends MY_Controller
 		}
 
 		//pembagian 50% ke range
-		$feeRange = [10, 15, 25];
+		$feeRange = [5, 10, 15];
 		foreach ($feeRange as $key => $value) {
 			$feeToRange = $percentFee * $value;
 			$this->set('month_fee', array('range' => $key + 1), array('fee', 'fee +' . $feeToRange, false));
