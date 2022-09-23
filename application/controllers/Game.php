@@ -176,17 +176,17 @@ class Game extends MY_Controller
 
 	public function ajax()
 	{
-		switch ($_POST['action']) {
+		switch ($this->input->post('action')) {
 			case 'buy':
 				$chekcrypto = $this->getDataRow('account', 'crypto', array('pkey' => $this->id))[0];
-				$chekFarming = $this->getDataRow('farming', '*', array('pkey' => $_POST['data']))[0];
+				$chekFarming = $this->getDataRow('farming', '*', array('pkey' => $this->input->post('data')))[0];
 				$status = 'not enough';
 				$updatecrypto = '';
 				if (floatval($chekcrypto['crypto']) > floatval($chekFarming['price'])) {
 					$status = 'success';
 					$updatecrypto = floatval($chekcrypto['crypto']) - floatval($chekFarming['price']);
 					$this->update('account', array('crypto' => $updatecrypto), array('pkey' => $this->id));
-					$this->insert('detail_account_farming', array('refkey' => $this->id, 'farmingkey' => $_POST['data'], 'time' => strtotime('now')));
+					$this->insert('detail_account_farming', array('refkey' => $this->id, 'farmingkey' => $this->input->post('data'), 'time' => strtotime('now')));
 				}
 				echo json_encode(array('status' => $status, 'crypto' => number_format(round($updatecrypto, 2))));
 				break;
@@ -198,39 +198,35 @@ class Game extends MY_Controller
 
 			case 'widraw':
 				$companny = $this->getDataRow('profile_company', '*')[0];
-				if ($companny['minimumwidraw'] > $_POST['widraw']) {
+				if ($companny['minimumwidraw'] > $this->input->post('widraw')) {
 					echo json_encode(array('status' => 'Minimum Widraw ' . $companny['minimumwidraw'] . ' Matic'));
 					die;
 				}
 				$account = $this->getDataRow('account', '*', array('pkey' => $this->id))[0];
-				if ($account['crypto'] < $_POST['widraw']) {
+				if ($account['crypto'] < $this->input->post('widraw')) {
 					echo json_encode(array('status' => 'Matic is not enough'));
 					die;
 				} else {
-					$this->set('account', array('pkey' => $this->id), array('crypto', 'crypto -' . $_POST['widraw'], false));
-					$dataInsert = array('refkey' => $this->id, 'walletaddress' => $_POST['wallet'], 'time' => strtotime('now'), 'crypto' => $_POST['widraw']);
+					$this->set('account', array('pkey' => $this->id), array('crypto', 'crypto -' . $this->input->post('widraw'), false));
+					$dataInsert = array('refkey' => $this->id, 'walletaddress' => $this->input->post('wallet'), 'time' => strtotime('now'), 'crypto' => $this->input->post('widraw'));
 					$this->insert('widraw', $dataInsert);
 					$this->insert('logs', array(
 						'targetkey' => $this->id,
 						'refkey' => $this->id,
 						'time' => strtotime('now'),
 						'note' => 'widraw',
-						'value' => '- ' . $_POST['widraw'],
+						'value' => '- ' . $this->input->post('widraw'),
 					));
 
 					echo json_encode(array('status' => 'success'));
 				}
-
-
-
-
 				break;
 			case 'claim':
 				//pembagain rengking 4-10 = 5% ;1= 40%;2=15%;3=10%
 				$percentageFee = [40, 15, 10, 5, 5, 5, 5, 5, 5, 5];
 
-				$range = $this->getDataRow('range', '*', array('date <=' => strtotime('-' . $_POST['target'] . ' month')), $this->limitRange, '', 'range.count desc');
-				$monthFee = $this->getDataRow('month_fee', 'fee', array('range' => $_POST['target']))[0]['fee'];
+				$range = $this->getDataRow('range', '*', array('date <=' => strtotime('-' . $this->input->post('target') . ' month')), $this->limitRange, '', 'range.count desc');
+				$monthFee = $this->getDataRow('month_fee', 'fee', array('range' => $this->input->post('target')))[0]['fee'];
 				if ($range[0]['refkey'] == $this->id) {
 					foreach ($range as $key => $value) {
 						$fee = $monthFee / 100;
@@ -238,7 +234,7 @@ class Game extends MY_Controller
 						$this->set('account', array('pkey' => $value['refkey']), array('crypto', 'crypto +' . $fee, false));
 						$this->update('range', array('count' => 0, 'date' => strtotime('now')), array('refkey' => $value['refkey']));
 					}
-					$this->update('month_fee', array('fee' => 0), array('range' => $_POST['target']));
+					$this->update('month_fee', array('fee' => 0), array('range' => $this->input->post('target')));
 					echo json_encode(array('status' => 'success'));
 				}
 				break;
