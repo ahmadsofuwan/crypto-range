@@ -147,6 +147,12 @@ class Game extends MY_Controller
 			$feeToRange = $percentFee * $value;
 			$this->set('month_fee', array('range' => $key + 1), array('fee', 'fee +' . $feeToRange, false));
 		}
+
+		$globalRange = [4, 8, 12];
+		foreach ($globalRange as $key => $value) {
+			$feeToRange = $percentFee * $value;
+			$this->set('global_fee', array('percentage' => $value), array('fee', 'fee +' . $feeToRange, false));
+		}
 	}
 
 	private function follower($pkeys)
@@ -237,6 +243,38 @@ class Game extends MY_Controller
 					$this->update('month_fee', array('fee' => 0), array('range' => $this->input->post('target')));
 					echo json_encode(array('status' => 'success'));
 				}
+				break;
+			case 'gpool':
+				$gpool = $this->getDataRow('global_fee', '*', array('pkey' => $this->input->post('data')))[0];
+				$account = $this->getDataRow('account', 'crypto', array('pkey' => $this->id))[0];
+
+				if ($gpool['price'] > $account['crypto']) { //saldo cukup tidak ?
+					echo json_encode(['status' => 'Your matic is not enough']);
+					die;
+				}
+
+				$chekList = $this->getDataRow('global_list', '*', array('refkey' => $this->id, 'globalkey' => $this->input->post('data')));
+				if (count($chekList) >= $gpool['limit']) {
+					echo json_encode(['status' => 'Your Limit to Buy']);
+					die;
+				}
+
+				if ($gpool['count'] < $gpool['limit_count']) {
+					$this->set('account', array('pkey' => $this->id), array('crypto', 'crypto +' . $gpool['price'], false));
+					$this->insert('logs', array('targetkey' => $this->id, 'refkey' => $this->id, 'time' => strtotime('now'), 'note' => 'Buy G-Pools', 'value' => '-' . $gpool['price']));
+
+					$this->set('global_fee', array('pkey' => $this->input->post('data')), array('count', 'count +1', false)); //tambah count 
+					$this->insert('global_list', array('refkey' => $this->id, 'globalkey' => $this->input->post('data')));
+					echo json_encode(['status' => 'success']);
+					die;
+				} else {
+					echo json_encode(['status' => 'This Fulli']);
+					die;
+				}
+
+
+
+
 				break;
 			default:
 				echo json_encode(array('status' => 'nothing Action'));

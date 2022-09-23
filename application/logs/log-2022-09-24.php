@@ -27,3 +27,11 @@ ERROR - 02:25 --> Query error: Table 'crypto_range.farming' doesn't exist - Inva
 FROM `farming`
 WHERE `pkey` = '1'
 ERROR - 02:29 --> Severity: error --> Exception: syntax error, unexpected 'Matic' (T_STRING), expecting ',' or ';' C:\xampp_php7.3\htdocs\cryptoRange\application\views\public\gpools.php 32
+ERROR - 03:11 --> Query error: Unknown column 'crpto' in 'field list' - Invalid query: SELECT `crpto`
+FROM `account`
+WHERE `pkey` = '52'
+ERROR - 03:11 --> Query error: Unknown column 'crpto' in 'field list' - Invalid query: SELECT `crpto`
+FROM `account`
+WHERE `pkey` = '52'
+ERROR - 03:12 --> Severity: Notice --> Undefined offset: 0 C:\xampp_php7.3\htdocs\cryptoRange\application\controllers\Game.php 256
+ERROR - 03:12 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable C:\xampp_php7.3\htdocs\cryptoRange\application\controllers\Game.php 257

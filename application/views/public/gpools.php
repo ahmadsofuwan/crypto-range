@@ -46,19 +46,14 @@
 </div>
 <script>
     $('.btn-stake').click(function() {
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Thi Fiture Is Coming Soon!',
-        })
-        return
+
         var val = $(this).val()
         $.ajax({
                 url: '<?= base_url('Game/ajax') ?>',
                 type: 'POST',
                 dataType: 'json',
                 data: {
-                    action: 'buy',
+                    action: 'gpool',
                     data: val,
                 },
             })
