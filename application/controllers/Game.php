@@ -86,6 +86,17 @@ class Game extends MY_Controller
 		$data['url'] = 'public/range';
 		$this->templatePublic($data);
 	}
+
+	public function gpool()
+	{
+		$item = $this->getDataRow('global_fee');
+
+		$data['html']['nav'] = 'gpool';
+		$data['html']['item'] = $item;
+		$data['url'] = 'public/gpools';
+		$this->templatePublic($data);
+	}
+
 	public function crypto()
 	{
 		$account = $this->getDataRow('account', '*', array('pkey' => $this->id));
@@ -106,6 +117,7 @@ class Game extends MY_Controller
 		$data['url'] = 'public/crypto';
 		$this->templatePublic($data);
 	}
+
 	private function referalFee($fee)
 	{
 

@@ -57,8 +57,6 @@ class Refral extends MY_Controller
 		$this->insert('range', array('refkey' => $session, 'date' => strtotime('now')));
 		$this->set('range', array('range.refkey' => $refral), array('count', 'count + 1', false));
 
-
-
 		redirect(base_url('Auth'));
 	}
 }

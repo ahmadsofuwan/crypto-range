@@ -49,7 +49,7 @@
                         <a class="nav-link <?php echo isset($nav) && $nav == 'range' ? 'active' : '' ?>" href="<?php echo base_url('Game/range') ?>">N-POOLS</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php echo isset($nav) && $nav == 'gpols' ? 'active' : '' ?>" href="<?php echo base_url('Game/range') ?>">G-POOLS</a>
+                        <a class="nav-link <?php echo isset($nav) && $nav == 'gpool' ? 'active' : '' ?>" href="<?php echo base_url('Game/gpool') ?>">G-POOLS</a>
                     </li>
                     <li class=" nav-item">
                         <a class="nav-link" href="<?php echo base_url('Auth/logout') ?>">exit</a>
