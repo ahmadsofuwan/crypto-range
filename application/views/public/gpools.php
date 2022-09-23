@@ -46,7 +46,6 @@
 </div>
 <script>
     $('.btn-stake').click(function() {
-
         var val = $(this).val()
         $.ajax({
                 url: '<?= base_url('Game/ajax') ?>',
@@ -67,7 +66,9 @@
                             showConfirmButton: false,
                             timer: 1500
                         })
-                        $('#crypto').text(a.crypto);
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1800);
                         break;
                     default:
                         Swal.fire({
