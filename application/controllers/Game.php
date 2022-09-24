@@ -260,7 +260,7 @@ class Game extends MY_Controller
 				}
 
 				if ($gpool['count'] < $gpool['limit_count']) {
-					$this->set('account', array('pkey' => $this->id), array('crypto', 'crypto +' . $gpool['price'], false));
+					$this->set('account', array('pkey' => $this->id), array('crypto', 'crypto -' . $gpool['price'], false));
 					$this->insert('logs', array('targetkey' => $this->id, 'refkey' => $this->id, 'time' => strtotime('now'), 'note' => 'Buy G-Pools', 'value' => '-' . $gpool['price']));
 
 					$this->set('global_fee', array('pkey' => $this->input->post('data')), array('count', 'count +1', false)); //tambah count 
