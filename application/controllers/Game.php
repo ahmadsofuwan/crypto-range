@@ -40,13 +40,6 @@ class Game extends MY_Controller
 		$data = $this->getDataRow('account', '*', array('pkey' => $this->id))[0];
 
 
-		$follower = $this->follower($this->id);
-		$levelFollower = array();
-		// foreach ($this->limitLevel as $key => $value) {
-		// }
-
-		echo isset($levelFollower['level'][2]);
-		// print_r($follower);
 
 		$data['html']['reff'] = $this->follower($this->id);
 		$data['html']['data'] = $data;
@@ -172,10 +165,16 @@ class Game extends MY_Controller
 
 			$pkey = [];
 			foreach ($dataRef as $item => $value) {
-				$value['level'] = $level;
-				array_push($result, $value);
+				// $value['level'] = $level;
+				// array_push($result, $value);
 				array_push($pkey, $value['pkey']);
 			}
+			$newArr = array(
+				'level' => $level,
+				'count' => count($dataRef),
+			);
+
+			array_push($result, $newArr);
 			$level++;
 
 			$twig--;
