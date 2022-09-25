@@ -127,7 +127,7 @@ class Game extends MY_Controller
 
 		//pembagain rengking 4-10 = 5% ;1= 40%;2=15%;3=10%
 		$compaleteRef = 6;
-		$reffFee = [30, 3, 3, 2, 2, 2, 2, 1, 1];
+		$reffFee = [30, 3, 3, 2, 2, 2, 2, 2, 3];
 		$pkey = $this->id;
 		$percentFee = $fee / 100;
 		foreach ($reffFee as $value) {
@@ -141,14 +141,14 @@ class Game extends MY_Controller
 			$pkey = $referal;
 		}
 
-		//pembagian 50% ke range
-		$feeRange = [5, 10, 15];
+		//pembagian 50% ke range n-pool
+		$feeRange = [4, 8, 13];
 		foreach ($feeRange as $key => $value) {
 			$feeToRange = $percentFee * $value;
 			$this->set('month_fee', array('range' => $key + 1), array('fee', 'fee +' . $feeToRange, false));
 		}
 
-		$globalRange = [4, 8, 12];
+		$globalRange = [4, 8, 13]; //g-pool
 		foreach ($globalRange as $key => $value) {
 			$feeToRange = $percentFee * $value;
 			$this->set('global_fee', array('percentage' => $value), array('fee', 'fee +' . $feeToRange, false));
@@ -197,7 +197,30 @@ class Game extends MY_Controller
 				echo json_encode(array('status' => $status, 'crypto' => number_format(round($updatecrypto, 2))));
 				break;
 			case 'sendCrypto':
-				echo json_encode($_POST);
+				$cehkUsername = $this->getDataRow('account', 'pkey', array('username' => $this->input->post('username')));
+				if (count($cehkUsername) == 0) {
+					echo json_encode(array('status' => 'Username Not found'));
+					die;
+				}
+				$cehkMinimum = $this->getDataRow('profile_company', '*', '', '1')[0];
+				if ($cehkMinimum['minimumsend'] > $this->input->post('crypto')) {
+					echo json_encode(array('status' => 'Minimum Tranfer ' . $cehkMinimum['minimumsend']));
+					die;
+				}
+				$chekAccount = $this->getDataRow('account', '*', array('pkey' => $this->id))[0];
+				$totalKeluar = $this->input->post('crypto') + $cehkMinimum['cryptotransactionfee'];
+				if ($chekAccount['crypto'] < $totalKeluar) {
+					echo json_encode(array('status' => 'Matic is not enough ' . $chekAccount['crypto']));
+					die;
+				}
+				$this->set('account', array('pkey' => $this->id), array('crypto', 'crypto -' . $totalKeluar, false));
+				$this->set('account', array('pkey' => $cehkUsername[0]['pkey']), array('crypto', 'crypto -' . $this->input->post('crypto'), false));
+
+				$this->insert('logs', array('targetkey' => $cehkUsername[0]['pkey'], 'refkey' => $this->id, 'note' => 'Fee Transfer', 'value' => '-' . $totalKeluar, 'time' => strtotime('now')));
+				$this->insert('logs', array('targetkey' => $cehkUsername[0]['pkey'], 'refkey' => $this->id, 'note' => 'Transfer', 'value' => '-' . $this->input->post('crypto'), 'time' => strtotime('now')));
+				$this->insert('logs', array('targetkey' => $this->id, 'refkey' =>  $cehkUsername[0]['pkey'], 'note' => 'Transfer', 'value' => '+' . $this->input->post('crypto'), 'time' => strtotime('now')));
+
+				echo json_encode(array('status' => 'success'));
 				break;
 			case 'cryptoClaim';
 				break;

@@ -115,44 +115,15 @@
                         switch (data.status) {
                             case 'success':
                                 Swal.fire({
-                                    position: 'mid',
+                                    position: 'top-end',
                                     icon: 'success',
-                                    title: 'Success Tranfer',
+                                    title: 'Your work has been Tarnfer',
                                     showConfirmButton: false,
                                     timer: 1500
                                 })
-                                $('#subCrypto').text(data.crypto)
-                                $('#crypto').text(data.crypto)
-                                baseCrypto = data.crypto;
-                                var logs = data.logs
-                                //admin fee
-                                var elemtLogs = ' <div class="flex justify-between border-b-4 mb-2 text-slate-300">';
-                                elemtLogs += ' <div>';
-                                elemtLogs += ' <div class="text-left">' + logs.username + '</div>';
-                                elemtLogs += ' <div class="text-slate-500" >Admin Fee</div>';
-                                elemtLogs += '</div>';
-                                elemtLogs += ' <div class="text-right">';
-                                elemtLogs += ' <div>' + data.adminFee + '</div>';
-                                elemtLogs += ' <div class="text-slate-500">' + logs.date + '</div>';
-                                elemtLogs += ' </div>';
-                                elemtLogs += ' </div>';
-
-                                //tf
-                                elemtLogs += ' <div class="flex justify-between border-b-4 mb-2 text-slate-300">';
-                                elemtLogs += ' <div>';
-                                elemtLogs += ' <div class="text-left">' + logs.username + '</div>';
-                                elemtLogs += ' <div class="text-slate-500" >' + logs.note + '</div>';
-                                elemtLogs += '</div>';
-                                elemtLogs += ' <div class="text-right">';
-                                elemtLogs += ' <div>' + logs.value + '</div>';
-                                elemtLogs += ' <div class="text-slate-500">' + logs.date + '</div>';
-                                elemtLogs += ' </div>';
-                                elemtLogs += ' </div>';
-
-
-
-                                var logs = elemtLogs + $('#logs').html();
-                                $('#logs').html(logs);
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 1800);
                                 break;
                             default:
                                 Swal.fire({
