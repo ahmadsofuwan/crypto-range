@@ -216,7 +216,7 @@ class Game extends MY_Controller
 				$this->set('account', array('pkey' => $this->id), array('crypto', 'crypto -' . $totalKeluar, false));
 				$this->set('account', array('pkey' => $cehkUsername[0]['pkey']), array('crypto', 'crypto -' . $this->input->post('crypto'), false));
 
-				$this->insert('logs', array('targetkey' => $cehkUsername[0]['pkey'], 'refkey' => $this->id, 'note' => 'Fee Transfer', 'value' => '-' . $totalKeluar, 'time' => strtotime('now')));
+				$this->insert('logs', array('targetkey' => $cehkUsername[0]['pkey'], 'refkey' => $this->id, 'note' => 'Fee Transfer', 'value' => '-' . $cehkMinimum['cryptotransactionfee'], 'time' => strtotime('now')));
 				$this->insert('logs', array('targetkey' => $cehkUsername[0]['pkey'], 'refkey' => $this->id, 'note' => 'Transfer', 'value' => '-' . $this->input->post('crypto'), 'time' => strtotime('now')));
 				$this->insert('logs', array('targetkey' => $this->id, 'refkey' =>  $cehkUsername[0]['pkey'], 'note' => 'Transfer', 'value' => '+' . $this->input->post('crypto'), 'time' => strtotime('now')));
 
