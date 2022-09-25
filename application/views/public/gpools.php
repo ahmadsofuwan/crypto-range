@@ -30,7 +30,7 @@
 
                         <div class="flex justify-center"><img src="<?= base_url('asset/public/img/usdt.png') ?>" alt="Usdt" class="w-20 lg:w-14"></div>
                         <div class="text-center font-extrabold"><?= $value['percentage'] ?>%</div>
-                        <div class="text-center mb-4 mt-2 font-extrabold text-yellow-500"><?= number_format($value['fee']) ?> Matic</div>
+                        <div class="text-center mb-4 mt-2 font-extrabold text-yellow-500"><?= number_format($value['fee'], 2) ?> Matic</div>
                     </div>
                     <div>
                         <div class="uppercase font-extrabold text-slate-500 mt-2 text-center">Limit</div>

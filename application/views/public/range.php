@@ -17,7 +17,7 @@
             <div class="text-center font-bold text-xl capitalize text-yellow-300 flex justify-content-center">
                 <div class="flex">
                     <img src="<?php echo base_url('asset/public/img/') ?>usdt.png" alt="Logo" class="w-8">
-                    <?= $feeThree ?>
+                    <?= number_format($feeThree, 2) ?>
                     Matic
                 </div>
             </div>
@@ -37,7 +37,7 @@
             <div class="text-center font-bold text-xl capitalize text-yellow-300 flex justify-content-center">
                 <div class="flex">
                     <img src="<?php echo base_url('asset/public/img/') ?>usdt.png" alt="Logo" class="w-8">
-                    <?= $feeTwo ?>
+                    <?= number_format($feeTwo, 2)  ?>
                     Matic
                 </div>
             </div>
@@ -57,7 +57,7 @@
             <div class="text-center font-bold text-xl capitalize text-yellow-300 flex justify-content-center">
                 <div class="flex">
                     <img src="<?php echo base_url('asset/public/img/') ?>usdt.png" alt="Logo" class="w-8">
-                    <?= $feeOne ?>
+                    <?= number_format($feeOne, 2)  ?>
                     Matic
                 </div>
             </div>
