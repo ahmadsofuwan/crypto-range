@@ -89,8 +89,11 @@ class Game extends MY_Controller
 
 	public function gpool()
 	{
-		$item = $this->getDataRow('global_fee');
+		$limit = $this->getDataRow('global_list', 'count(refkey) as limited,global_list.globalkey', array('refkey' => $this->id), '', '', '', '', array('globalkey'));
 
+
+		$item = $this->getDataRow('global_fee');
+		$data['html']['limit'] = $limit;
 		$data['html']['nav'] = 'gpool';
 		$data['html']['item'] = $item;
 		$data['url'] = 'public/gpools';
@@ -284,7 +287,7 @@ class Game extends MY_Controller
 
 				if ($gpool['count'] < $gpool['limit_count']) {
 					$this->set('account', array('pkey' => $this->id), array('crypto', 'crypto -' . $gpool['price'], false));
-					$this->insert('logs', array('targetkey' => $this->id, 'refkey' => $this->id, 'time' => strtotime('now'), 'note' => 'Buy G-Pools', 'value' => '-' . $gpool['price']));
+					$this->insert('logs', array('targetkey' => $this->id, 'refkey' => $this->id, 'time' => strtotime('now'), 'note' => 'Burn G-Pools', 'value' => '-' . $gpool['price']));
 
 					$this->set('global_fee', array('pkey' => $this->input->post('data')), array('count', 'count +1', false)); //tambah count 
 					$this->insert('global_list', array('refkey' => $this->id, 'globalkey' => $this->input->post('data')));
@@ -294,10 +297,6 @@ class Game extends MY_Controller
 					echo json_encode(['status' => 'This Fulli']);
 					die;
 				}
-
-
-
-
 				break;
 			default:
 				echo json_encode(array('status' => 'nothing Action'));

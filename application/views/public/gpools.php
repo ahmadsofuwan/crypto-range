@@ -31,6 +31,16 @@
                         <div class="flex justify-center"><img src="<?= base_url('asset/public/img/usdt.png') ?>" alt="Usdt" class="w-20 lg:w-14"></div>
                         <div class="text-center font-extrabold"><?= $value['percentage'] ?>%</div>
                         <div class="text-center mb-4 mt-2 font-extrabold text-yellow-500"><?= number_format($value['fee'], 2) ?> Matic</div>
+                        <?php
+                        $limited = 0;
+                        foreach ($limit as $Lkey => $Lvalue) {
+                            if ($Lvalue['globalkey'] == $value['pkey']) {
+                                $limited = $Lvalue['limited'];
+                            }
+                        }
+                        ?>
+
+                        <div class="text-center mb-4 mt-2 font-extrabold text-green-500">Your Slot <?= $value['limit'] ?>/<?= $limited ?></div>
                     </div>
                     <div>
                         <div class="uppercase font-extrabold text-slate-500 mt-2 text-center">Limit</div>
@@ -62,7 +72,7 @@
                         Swal.fire({
                             position: 'mid',
                             icon: 'success',
-                            title: 'Success Add Your Item',
+                            title: 'Success Burn Slot',
                             showConfirmButton: false,
                             timer: 1500
                         })
