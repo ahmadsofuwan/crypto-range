@@ -39,8 +39,6 @@ class Game extends MY_Controller
 
 		$data = $this->getDataRow('account', '*', array('pkey' => $this->id))[0];
 
-
-
 		$data['html']['reff'] = $this->follower($this->id);
 		$data['html']['data'] = $data;
 		$data['html']['nav'] = 'home';
