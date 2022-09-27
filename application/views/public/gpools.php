@@ -10,6 +10,7 @@
             </svg>
         </h2>
         <h2 class="text-xl text-yellow-500 font-extrabold flex justify-content-center"> <span class="mx-5">VIP POOLS</span></h2>
+        <h2 class="text-md text-red-500 font-extrabold flex justify-content-center"> <span class="mx-5"><?= date('d/m/Y h:i', $commpany['dateclaim']) ?></span></h2>
     </div>
     <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 gap-2 mt-5">
         <?php foreach ($item as $key => $value) { ?>

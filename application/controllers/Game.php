@@ -21,6 +21,7 @@ class Game extends MY_Controller
 
 	public function index()
 	{
+
 		$account = $this->getDataRow('account', '*', array('pkey' => $this->id))[0];
 
 		if ($account['status'] == 0) {
@@ -87,9 +88,10 @@ class Game extends MY_Controller
 	public function gpool()
 	{
 		$limit = $this->getDataRow('global_list', 'count(refkey) as limited,global_list.globalkey', array('refkey' => $this->id), '', '', '', '', array('globalkey'));
-
+		$commpany = $this->getDataRow('profile_company')[0];
 
 		$item = $this->getDataRow('global_fee');
+		$data['html']['commpany'] = $commpany;
 		$data['html']['limit'] = $limit;
 		$data['html']['nav'] = 'gpool';
 		$data['html']['item'] = $item;
