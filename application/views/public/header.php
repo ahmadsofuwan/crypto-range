@@ -43,7 +43,7 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav font-medium">
                     <li class="nav-item">
-                        <a class="nav-link <?php echo isset($nav) && $nav == 'home' ? 'active' : '' ?>" aria-current="page" href="<?php echo base_url() ?>">Dashboard</a>
+                        <a class="nav-link <?php echo isset($nav) && $nav == 'home' ? 'active' : '' ?>" aria-current="page" href="<?php echo base_url() ?>">Wall</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <?php echo isset($nav) && $nav == 'range' ? 'active' : '' ?>" href="<?php echo base_url('Game/range') ?>">N-POOLS</a>

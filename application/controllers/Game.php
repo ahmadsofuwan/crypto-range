@@ -14,6 +14,9 @@ class Game extends MY_Controller
 		}
 		$this->limitRange = 10;
 		$this->limitLevel = 9;
+		$this->reffFee = [30, 2, 2, 2, 2, 2, 2, 3, 4];
+		$this->npoolFee = [4, 8, 13];
+		$this->ClaimFee = [40, 15, 10, 5, 5, 5, 5, 5, 5, 5]; //fee npool claim
 	}
 
 	public function index()
@@ -39,6 +42,7 @@ class Game extends MY_Controller
 
 		$data = $this->getDataRow('account', '*', array('pkey' => $this->id))[0];
 
+		$data['html']['reffFee'] = $this->reffFee;
 		$data['html']['reff'] = $this->follower($this->id);
 		$data['html']['data'] = $data;
 		$data['html']['nav'] = 'home';
@@ -72,6 +76,8 @@ class Game extends MY_Controller
 		$data['html']['rangeThree'] = $rangeThree;
 		$data['html']['rangeTwo'] = $rangeTwo;
 		$data['html']['rangeOne'] = $rangeOne;
+		$data['html']['npoolFee'] = $this->npoolFee;
+		$data['html']['claimFee'] = $this->ClaimFee;
 		$data['html']['nav'] = 'range';
 		$data['html']['data'] = $data;
 		$data['url'] = 'public/range';
@@ -121,7 +127,7 @@ class Game extends MY_Controller
 
 		//pembagain rengking 4-10 = 5% ;1= 40%;2=15%;3=10%
 		$compaleteRef = 6;
-		$reffFee = [30, 3, 3, 2, 2, 2, 2, 2, 3];
+		$reffFee = $this->reffFee;
 		$pkey = $this->id;
 		$percentFee = $fee / 100;
 		foreach ($reffFee as $value) {
@@ -138,7 +144,7 @@ class Game extends MY_Controller
 		}
 
 		//pembagian 50% ke range n-pool
-		$feeRange = [4, 8, 13];
+		$feeRange = $this->npoolFee;
 		foreach ($feeRange as $key => $value) {
 			$feeToRange = $percentFee * $value;
 			$this->set('month_fee', array('range' => $key + 1), array('fee', 'fee +' . $feeToRange, false));
@@ -254,7 +260,7 @@ class Game extends MY_Controller
 				break;
 			case 'claim':
 				//pembagain rengking 4-10 = 5% ;1= 40%;2=15%;3=10%
-				$percentageFee = [40, 15, 10, 5, 5, 5, 5, 5, 5, 5];
+				$percentageFee = $this->ClaimFee;
 
 				$range = $this->getDataRow('range', '*', array('date <=' => strtotime('-' . $this->input->post('target') . ' month')), $this->limitRange, '', 'range.count desc');
 				$monthFee = $this->getDataRow('month_fee', 'fee', array('range' => $this->input->post('target')))[0]['fee'];

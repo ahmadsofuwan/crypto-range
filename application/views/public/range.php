@@ -14,18 +14,20 @@
     <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 xl:grid-cols-3 gap-2 mt-5">
         <div class="grid grid-cols-1 gap-2 mt-5 h-fit">
             <div class="text-center font-bold text-xl capitalize text-yellow-300">POOL 3</div>
-            <div class="text-center font-bold text-xl capitalize text-yellow-300 flex justify-content-center">
-                <div class="flex">
+            <div class="text-center font-bold text-xl capitalize text-yellow-300 ">
+                <div class="flex justify-content-center ">
                     <img src="<?php echo base_url('asset/public/img/') ?>usdt.png" alt="Logo" class="w-8">
                     <?= number_format($feeThree, 2) ?>
-                    Matic
+                    <span>Matic</span>
                 </div>
+                <div class="text-green-500"><?= $npoolFee[2] ?>%</div>
             </div>
             <?php foreach ($rangeThree as $key => $value) { ?>
 
                 <div class="border-rb rounded-3xl p-0.5">
-                    <div class="rounded-3xl bg-indigo-900 p-3 grid grid-cols-2 ">
+                    <div class="rounded-3xl bg-indigo-900 p-3 grid grid-cols-3 ">
                         <span><?= $key + 1 ?> : <?= $value['username'] ?></span>
+                        <span><?= $claimFee[$key] ?>%</span>
                         <?php if ($value['userkey'] == $this->id && $key == 0) { ?> <button class="bg-yellow-500 p-1 rounded-xl font-bold w-1/2 ml-auto hover:bg-yellow-700 btn-claim" target="3">Claim</button><?php } ?>
                     </div>
                 </div>
@@ -34,18 +36,20 @@
         </div>
         <div class="grid grid-cols-1 gap-2 mt-5 h-fit">
             <div class="text-center font-bold text-xl capitalize text-yellow-300">POOL 2</div>
-            <div class="text-center font-bold text-xl capitalize text-yellow-300 flex justify-content-center">
-                <div class="flex">
+            <div class="text-center font-bold text-xl capitalize text-yellow-300">
+                <div class="flex flex justify-content-center">
                     <img src="<?php echo base_url('asset/public/img/') ?>usdt.png" alt="Logo" class="w-8">
                     <?= number_format($feeTwo, 2)  ?>
                     Matic
                 </div>
+                <div class="text-green-500"><?= $npoolFee[1] ?>%</div>
             </div>
             <?php foreach ($rangeTwo as $key => $value) { ?>
 
                 <div class="border-rb rounded-3xl p-0.5">
-                    <div class="rounded-3xl bg-indigo-900 p-3 grid grid-cols-2 ">
+                    <div class="rounded-3xl bg-indigo-900 p-3 grid grid-cols-3 ">
                         <span><?= $key + 1 ?> : <?= $value['username'] ?></span>
+                        <span><?= $claimFee[$key] ?>%</span>
                         <?php if ($value['userkey'] == $this->id && $key == 0) { ?> <button class="bg-yellow-500 p-1 rounded-xl font-bold w-1/2 ml-auto hover:bg-yellow-700 btn-claim" target="2">Claim</button><?php } ?>
                     </div>
                 </div>
@@ -54,18 +58,20 @@
         </div>
         <div class="grid grid-cols-1 gap-2 mt-5 h-fit">
             <div class="text-center font-bold text-xl capitalize text-yellow-300">POOL 1</div>
-            <div class="text-center font-bold text-xl capitalize text-yellow-300 flex justify-content-center">
-                <div class="flex">
+            <div class="text-center font-bold text-xl capitalize text-yellow-300 ">
+                <div class="flex justify-content-center">
                     <img src="<?php echo base_url('asset/public/img/') ?>usdt.png" alt="Logo" class="w-8">
                     <?= number_format($feeOne, 2)  ?>
                     Matic
                 </div>
+                <div class="text-green-500"><?= $npoolFee[0] ?>%</div>
             </div>
             <?php foreach ($rangeOne as $key => $value) { ?>
 
                 <div class="border-rb rounded-3xl p-0.5">
-                    <div class="rounded-3xl bg-indigo-900 p-3 grid grid-cols-2 ">
+                    <div class="rounded-3xl bg-indigo-900 p-3 grid grid-cols-3 ">
                         <span><?= $key + 1 ?> : <?= $value['username'] ?></span>
+                        <span><?= $claimFee[$key] ?>%</span>
                         <?php if ($value['userkey'] == $this->id && $key == 0) { ?> <button class="bg-yellow-500  rounded-xl font-bold w-1/2 ml-auto hover:bg-yellow-700 btn-claim   " target="1">Claim</button><?php } ?>
                     </div>
                 </div>

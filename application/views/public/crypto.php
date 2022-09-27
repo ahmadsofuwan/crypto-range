@@ -12,9 +12,7 @@
                 </svg>
                 <span class="uppercase my-auto">Reference</span>
             </a>
-            <div href="#" class="flex mt-3">
-                <span>$ <span id="usd" class="text-yellow-500"></span> /1 Matic</span>
-            </div>
+
             <div class="font-extrabold mb-5 hidden">
                 <div class="mt-2 mb-2">Address Wallet (Polygon)</div>
                 <span id="copy" class="mb-5"><?php echo $commpany['walletAddress'] ?></span>
@@ -283,24 +281,4 @@
             }
         })
     })
-    setInterval(function() {
-        maticInt()
-    }, 5000);
-    maticInt()
-
-    function maticInt() {
-        $.ajax({
-                url: 'https://api.coingecko.com/api/v3/simple/price',
-                type: 'GET',
-                dataType: 'json',
-                data: {
-                    ids: 'aave-polygon-wmatic',
-                    vs_currencies: 'usd',
-                },
-            })
-            .done(function(a) {
-                $('#usd').text(a['aave-polygon-wmatic']['usd'])
-
-            })
-    }
 </script>
