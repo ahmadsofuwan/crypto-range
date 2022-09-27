@@ -29,7 +29,7 @@ class Refral extends MY_Controller
 			redirect(base_url('Refral/shere'));
 			die;
 		} else if (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['refral'])) {
-			$this->session->set_flashdata('msg', 'Mohon Isi semua Bidang');
+			$this->session->set_flashdata('msg', 'Please Fill in all Fields');
 			$this->session->set_flashdata('post', $_POST);
 			redirect(base_url('Refral/shere'));
 			die;
