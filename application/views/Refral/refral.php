@@ -44,7 +44,7 @@
                                     <div class="text-center">
                                         <h1 class="text-2xl mb-4 text-orange-400 font-extrabold">Register Now !!!</h1>
                                     </div>
-                                    <form class="user" method="POST" action="<?= base_url('Refral/register') ?>">
+                                    <form class="user" method="POST" action="<?= base_url('Referral/register') ?>">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user" id="username" name="username" aria-describedby="emailHelp" placeholder="Enter username...">
                                         </div>
