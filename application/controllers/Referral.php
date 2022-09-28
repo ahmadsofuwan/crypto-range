@@ -4,13 +4,13 @@ use SebastianBergmann\Environment\Console;
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Refral extends MY_Controller
+class Referral extends MY_Controller
 {
 	public function index()
 	{
 		redirect(base_url('Refral/shere'));
 	}
-	public function shere($ref = '')
+	public function share($ref = '')
 	{
 		$data['title'] = 'Refral';
 		$data['ref'] = $ref;

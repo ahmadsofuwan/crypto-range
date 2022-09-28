@@ -15,7 +15,7 @@
         <h2 class="text-2xl font-extrabold">Total Networks</h2>
         <a class="text-green-500 font-extrabold text-3xl" id="refral">
             Copy Refferal
-            <input type="text" id="refralLink" style="display: none;" value="<?= base_url('Refral/shere/' . $this->username) ?>">
+            <input type="text" id="refralLink" style="display: none;" value="<?= base_url('Referral/share/' . $this->username) ?>">
         </a>
 
     </div>

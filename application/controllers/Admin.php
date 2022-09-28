@@ -356,7 +356,7 @@ class Admin extends MY_Controller
 						'targetkey' => $chekData['refkey'],
 						'refkey' => $chekData['refkey'],
 						'time' => strtotime('now'),
-						'note' => 'widraw filed',
+						'note' => 'Withdraw',
 						'value' => '-' . $chekData['crypto'],
 					));
 				}
@@ -369,7 +369,7 @@ class Admin extends MY_Controller
 					'targetkey' => $data['refkey'],
 					'refkey' => $data['refkey'],
 					'time' => strtotime('now'),
-					'note' => 'widraw filed',
+					'note' => 'Withdraw failed',
 					'value' => '0',
 				));
 				echo json_encode(['status' => 'success']);

@@ -214,7 +214,7 @@ class Game extends MY_Controller
 				}
 				$cehkMinimum = $this->getDataRow('profile_company', '*', '', '1')[0];
 				if ($cehkMinimum['minimumsend'] > $this->input->post('crypto')) {
-					echo json_encode(array('status' => 'Minimum Tranfer ' . $cehkMinimum['minimumsend']));
+					echo json_encode(array('status' => 'Minimum Transfer ' . $cehkMinimum['minimumsend']));
 					die;
 				}
 				$chekAccount = $this->getDataRow('account', '*', array('pkey' => $this->id))[0];
@@ -253,7 +253,7 @@ class Game extends MY_Controller
 						'targetkey' => $this->id,
 						'refkey' => $this->id,
 						'time' => strtotime('now'),
-						'note' => 'widraw',
+						'note' => 'Withdraw',
 						'value' => '- ' . $this->input->post('widraw'),
 					));
 

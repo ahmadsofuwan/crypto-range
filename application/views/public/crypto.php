@@ -115,7 +115,7 @@
                                 Swal.fire({
                                     position: 'top-end',
                                     icon: 'success',
-                                    title: 'Your work has been Tarnfer',
+                                    title: 'Your work has been Transfer',
                                     showConfirmButton: false,
                                     timer: 1500
                                 })
