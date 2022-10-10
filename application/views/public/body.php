@@ -38,7 +38,7 @@
                         <span class="font-black text-green-500">Lv<?= $value['level'] ?></span>
                         <?php if ($key == 0) { ?>
                             <span class="ml-auto font-black">
-                                6 / <?= $value['count'] ?>
+                                <?= $value['count'] ?>
                             </span>
                         <?php } else { ?>
                             <span class="ml-auto font-bold">

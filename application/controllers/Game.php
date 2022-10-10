@@ -14,8 +14,8 @@ class Game extends MY_Controller
 		}
 		$this->limitRange = 10;
 		$this->limitLevel = 9;
-		$this->reffFee = [30, 2, 2, 2, 2, 2, 2, 3, 4];
-		$this->npoolFee = [4, 8, 13];
+		$this->reffFee = [30, 3, 2, 2, 2, 2, 2, 3, 4];
+		$this->npoolFee = [10];
 		$this->ClaimFee = [40, 15, 10, 5, 5, 5, 5, 5, 5, 5]; //fee npool claim
 	}
 
@@ -62,20 +62,11 @@ class Game extends MY_Controller
 		';
 
 		$rangeOne = $this->getDataRow('range', $select, array('date <=' => strtotime('-1 month')), '10', $joint, 'range.count desc');
-		$rangeTwo = $this->getDataRow('range', $select, array('date <=' => strtotime('-2 month')), '10', $joint, 'range.count desc');
-		$rangeThree = $this->getDataRow('range', $select, array('date <=' => strtotime('-3 month'),), '10', $joint, 'range.count desc');
-
 		$feeOne = $this->getDataRow('month_fee', 'fee', array('range' => 1))[0]['fee'];
-		$feeTwo = $this->getDataRow('month_fee', 'fee', array('range' => 2))[0]['fee'];
-		$feeThree = $this->getDataRow('month_fee', 'fee', array('range' => 3))[0]['fee'];
 
 
 		$data['html']['feeOne'] = $feeOne;
-		$data['html']['feeTwo'] = $feeTwo;
-		$data['html']['feeThree'] = $feeThree;
 
-		$data['html']['rangeThree'] = $rangeThree;
-		$data['html']['rangeTwo'] = $rangeTwo;
 		$data['html']['rangeOne'] = $rangeOne;
 		$data['html']['npoolFee'] = $this->npoolFee;
 		$data['html']['claimFee'] = $this->ClaimFee;
