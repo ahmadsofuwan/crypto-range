@@ -21,7 +21,10 @@
     </div>
     <div class="grid sm:grid-cols-1 gap-4 lg:grid-cols-3 md:grid-cols-1 gap-2 mt-5">
         <?php foreach ($reff as $key => $value) { ?>
-
+            <?php
+            if ($value['count'] == 0)
+                break;
+            ?>
             <div class="border-rb rounded-3xl p-0.5">
 
                 <div class="rounded-3xl bg-indigo-900 pr-5 pb-4 p-3">
