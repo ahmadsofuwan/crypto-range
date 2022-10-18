@@ -124,13 +124,13 @@ class Game extends MY_Controller
 		$reffFee = $this->reffFee;
 		$pkey = $this->id;
 		$percentFee = $fee / 100;
-		foreach ($reffFee as $value) {
+		foreach ($reffFee as $key => $value) {
 			if (empty($pkey))
 				break;
 			$percentage = $percentFee * $value;
 			$referal = $this->getDataRow('account', 'refkey', array('pkey' => $pkey))[0]['refkey'];
 			$chekTotalReff = $this->getDataRow('account', 'pkey', array('refkey' => $referal));
-			if (count($chekTotalReff) >= $compaleteRef) { //jika refnya mencukupi standar maka dapat fee
+			if (count($chekTotalReff) >= $compaleteRef || $key == 0) { //jika refnya mencukupi standar atau array pertama maka dapat fee
 				$this->set('account', array('pkey' => $referal), array('crypto', 'crypto +' . $percentage, false));
 				$this->insert('logs', array('refkey' => $referal, 'targetkey' => $this->id, 'time' => strtotime('now'), 'note' => 'Burn Reff', 'value' => '+' . $percentage));
 			}
