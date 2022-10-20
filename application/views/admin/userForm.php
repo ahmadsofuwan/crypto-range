@@ -42,6 +42,12 @@ if ($action == 'update')
 							</div>
 						</div>
 						<div class="form-group row">
+							<label for="password" class="col-sm-3 col-form-label">Matic</label>
+							<div class="col-sm">
+								<input type="password" class="form-control" id="password" name="matic">
+							</div>
+						</div>
+						<div class="form-group row">
 							<label for="bonus" class="col-sm-3 col-form-label">Role</label>
 							<div class="col-sm">
 								<select name="role" class="form-control">

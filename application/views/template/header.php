@@ -60,7 +60,7 @@
 
                 </div>
                 <div class="sidebar-brand-text mx-3">
-                    <?php echo $companyProfile[0]['menutitle'] ?>
+                    My Matic
                 </div>
             </a>
 
