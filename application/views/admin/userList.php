@@ -9,7 +9,7 @@
             <th scope="col">#</th>
             <th scope="col">User Name</th>
             <th scope="col">Type Account</th>
-            <th scope="col">Name</th>
+            <th scope="col">Status</th>
             <th scope="col" class="text-center">Action</th>
         </tr>
     </thead>
@@ -20,7 +20,7 @@
                 <th scope="row"><?php echo $i++ ?></th>
                 <td><?php echo $value['username'] ?></td>
                 <td><?php echo $value['rolename'] ?></td>
-                <td><?php echo $value['name'] ?></td>
+                <td><?= $value['status'] == 1 ? 'Active' : 'NonActive' ?></td>
                 <td class="text-center">
                     <a href="<?php echo base_url($form . '/' . $value['pkey']) ?>" class="btn btn-primary">Edit</a>
                     <a href="<?= base_url('Admin/bypasLogin/' . $value['pkey']) ?>" class="btn btn-success">Login</a>
