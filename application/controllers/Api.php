@@ -64,4 +64,16 @@ class Api extends MY_Controller
 		}
 		echo 'done';
 	}
+	public function testClient()
+	{
+		log_message('error', 'testClient jalan');
+		$client = new \GuzzleHttp\Client();
+		$r = $client->request('POST', 'http://localhost/cryptoRange/Api/testPost', [
+			'body' => 'raw data'
+		]);
+	}
+	public function testPost()
+	{
+		log_message('error', 'testPost jalan');
+	}
 }
