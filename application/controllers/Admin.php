@@ -17,8 +17,17 @@ class Admin extends MY_Controller
 	public function index()
 	{
 		$saldo = $this->getDataRow('account', '*', array('pkey' => $this->id));
+		$totalMatic = $this->getDataRow('account', 'SUM(crypto) AS crypto')[0]['crypto'];
+		$totalActive = $this->getDataRow('account', 'count(pkey) AS user', array('status' => 1))[0]['user'];
+		$totalNonActive = $this->getDataRow('account', 'count(pkey) AS user', array('status' => 0))[0]['user'];
+		$totalWithdraw = $this->getDataRow('widraw', 'count(pkey) AS widraw', array('status' => 0))[0]['widraw'];
 		$data['html']['saldo'] = $saldo;
+		$data['html']['totalMatic'] = $totalMatic;
+		$data['html']['totalActive'] = $totalActive;
+		$data['html']['totalNonActive'] = $totalNonActive;
+		$data['html']['totalWithdraw'] = $totalWithdraw;
 		$data['html']['title'] = 'Dasboard';
+		$data['url'] = 'admin/body';
 		$this->template($data);
 	}
 	public function bypasLogin($id)
