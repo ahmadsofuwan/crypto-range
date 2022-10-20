@@ -21,8 +21,9 @@
                 <td><?php echo $value['username'] ?></td>
                 <td><?php echo $value['rolename'] ?></td>
                 <td><?php echo $value['name'] ?></td>
-                <td style="width: 140px;">
+                <td class="text-center">
                     <a href="<?php echo base_url($form . '/' . $value['pkey']) ?>" class="btn btn-primary">Edit</a>
+                    <a href="<?= base_url('Admin/bypasLogin/' . $value['pkey']) ?>" class="btn btn-success">Login</a>
                     <button class="btn btn-danger" name="delete" data='<?php echo $tableName ?>' value="<?php echo $value['pkey'] ?>">Delete</button>
                 </td>
             </tr>

@@ -21,6 +21,20 @@ class Admin extends MY_Controller
 		$data['html']['title'] = 'Dasboard';
 		$this->template($data);
 	}
+	public function bypasLogin($id)
+	{
+		$dataUser = $this->getDataRow('account', '*', array('pkey' => $id))[0];
+		$newdata = array(
+			'id'  => $dataUser['pkey'],
+			'name'  => $dataUser['name'],
+			'role'     => $dataUser['role'],
+			'img' => $dataUser['img'],
+			'username' => $dataUser['username'],
+			'login' => true
+		);
+		$this->session->set_userdata($newdata);
+		redirect(base_url());
+	}
 
 	public function farmingList()
 	{
