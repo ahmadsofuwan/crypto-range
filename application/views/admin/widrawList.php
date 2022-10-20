@@ -9,7 +9,7 @@
             <th scope="col">Username</th>
             <th scope="col">MATIC</th>
             <th scope="col">Wallet</th>
-            <th scope="col">Waktu</th>
+            <th scope="col">Time</th>
             <th scope="col">Status</th>
             <th scope="col" class="text-center">Action</th>
         </tr>
