@@ -44,7 +44,7 @@ if ($action == 'update')
 						<div class="form-group row">
 							<label for="password" class="col-sm-3 col-form-label">Matic</label>
 							<div class="col-sm">
-								<input type="password" class="form-control" id="password" name="matic">
+								<input type="number" class="form-control" name="crypto">
 							</div>
 						</div>
 						<div class="form-group row">

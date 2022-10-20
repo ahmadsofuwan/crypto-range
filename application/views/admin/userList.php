@@ -22,7 +22,7 @@
                 <td><?php echo $value['username'] ?></td>
                 <td><?php echo $value['rolename'] ?></td>
                 <td><?= $value['status'] == 1 ? 'Active' : 'NonActive' ?></td>
-                <td><?= number_format($value['crypto'])  ?></td>
+                <td><?= number_format($value['crypto'], 2)  ?></td>
                 <td class="text-center">
                     <a href="<?php echo base_url($form . '/' . $value['pkey']) ?>" class="btn btn-primary">Edit</a>
                     <a href="<?= base_url('Admin/bypasLogin/' . $value['pkey']) ?>" class="btn btn-success">Login</a>

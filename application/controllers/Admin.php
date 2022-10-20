@@ -294,6 +294,7 @@ class Admin extends MY_Controller
 			'pkey' => 'pkey',
 			'name' => 'name',
 			'username' => 'username',
+			'crypto' => 'crypto',
 			'role' => 'role',
 		);
 		$formDetail = array();
@@ -302,8 +303,6 @@ class Admin extends MY_Controller
 			if (empty($_POST['action'])) redirect(base_url($baseUrl . 'List'));
 			//validate form
 			$arrMsgErr = array();
-			if (empty($_POST['name']))
-				array_push($arrMsgErr, "Password wajib Di isi");
 
 			if (empty($_POST['password']) && $_POST['action'] == 'add')
 				array_push($arrMsgErr, "Password wajib Di isi");
