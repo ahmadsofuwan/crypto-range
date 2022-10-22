@@ -40,7 +40,7 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <div class="navbar-collapse" id="navbarNavDropdown1">
                 <ul class="navbar-nav font-medium">
                     <li class="nav-item">
                         <a class="nav-link <?php echo isset($nav) && $nav == 'home' ? 'active' : '' ?>" aria-current="page" href="<?php echo base_url() ?>">Wall</a>
