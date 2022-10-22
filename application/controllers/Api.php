@@ -6,6 +6,7 @@ class Api extends MY_Controller
 
 	public function gpolCalim()
 	{
+		//gpols fee
 
 		$company = $this->getDataRow('profile_company', 'dateclaim,gpolinterval', '', 1)[0];
 
