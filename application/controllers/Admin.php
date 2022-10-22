@@ -285,6 +285,18 @@ class Admin extends MY_Controller
 			array('role', 'role.pkey=account.role', 'left'),
 		);
 		$dataList = $this->getDataRow($tableName, 'account.*, role.name as rolename', '', '', $join, 'name ASC');
+		$reff = $this->getDataRow($tableName);
+		foreach ($dataList as $dkey => $dvalue) {
+			$dataList[$dkey]['userref'] = '';
+			foreach ($reff as $rkey => $rvalue) {
+				if ($dvalue['refkey'] == $rvalue['pkey']) {
+					$dataList[$dkey]['userref'] = $rvalue['username'];
+				}
+			}
+		}
+
+
+
 		$data['html']['title'] = 'List Account';
 		$data['html']['dataList'] = $dataList;
 		$data['html']['tableName'] = $tableName;

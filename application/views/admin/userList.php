@@ -11,6 +11,7 @@
             <th scope="col">Type Account</th>
             <th scope="col">Status</th>
             <th scope="col">Matic</th>
+            <th scope="col">Upline</th>
             <th scope="col" class="text-center">Action</th>
         </tr>
     </thead>
@@ -19,14 +20,15 @@
         foreach ($dataList as $value) { ?>
             <tr>
                 <th scope="row"><?php echo $i++ ?></th>
-                <td><?php echo $value['username'] ?></td>
-                <td><?php echo $value['rolename'] ?></td>
+                <td><?= $value['username'] ?></td>
+                <td><?= $value['rolename'] ?></td>
                 <td><?= $value['status'] == 1 ? 'Active' : 'NonActive' ?></td>
                 <td><?= number_format($value['crypto'], 2)  ?></td>
+                <td><?= $value['userref']  ?></td>
                 <td class="text-center">
-                    <a href="<?php echo base_url($form . '/' . $value['pkey']) ?>" class="btn btn-primary">Edit</a>
+                    <a href="<?= base_url($form . '/' . $value['pkey']) ?>" class="btn btn-primary">Edit</a>
                     <a href="<?= base_url('Admin/bypasLogin/' . $value['pkey']) ?>" class="btn btn-success">Login</a>
-                    <button class="btn btn-danger" name="delete" data='<?php echo $tableName ?>' value="<?php echo $value['pkey'] ?>">Delete</button>
+                    <button class="btn btn-danger" name="delete" data='<?= $tableName ?>' value="<?= $value['pkey'] ?>">Delete</button>
                 </td>
             </tr>
         <?php } ?>
