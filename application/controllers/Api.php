@@ -4,76 +4,26 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Api extends MY_Controller
 {
 
-	public function index()
+	public function gpolCalim()
 	{
-		$yearToHour = 8760;
-		$reffList = $this->getDataRow('percentage_refferal', '*', '', '', '', 'pkey asc');
-		$table = 'detail_account_farming';
-		$select = $table . '.*,
-		farming.name farming_name,
-		farming.percentage percentage,
-		farming.price price,
-		';
-		$join = array(
-			array('farming', 'farming.pkey=' . $table . '.farmingkey', 'left'),
-		);
-		//update yg sudah sampai 
-		$this->update($table, array('status' => 1), array('hour >=' => $yearToHour, 'status' => 0));
 
-		$data = $this->getDataRow($table, $select, array('status' => 0), '', $join);
-		// print_r($data);
-		foreach ($data as $key => $value) {
-			$price = $value['price'];
-			$onePrcent = $price / 100;
-			$valuePrcent = $onePrcent * $value['percentage'];
-			$fixVal = $valuePrcent / $yearToHour;
+		$company = $this->getDataRow('profile_company', 'dateclaim,gpolinterval', '', 1)[0];
 
-			//tambahkan saldo account user
-			$this->set('account', array('pkey' => $value['refkey']), ['crypto', 'crypto + ' . $fixVal, false]);
+		if ($company['dateclaim'] <= strtotime('now')) {
 
-			//tambahkan profit ke detail Farming 
-			$this->set('detail_account_farming', array('pkey' => $value['pkey']), ['profit', 'profit + ' . $fixVal, false]);
-			$this->set('detail_account_farming', array('pkey' => $value['pkey']), ['hour', 'hour + 1', false]);
-
-			//tambahkan ke history
-			$dataHistory = array(
-				'refkey' => $value['refkey'],
-				'targetkey' => $value['refkey'],
-				'value' => '+ ' . $fixVal,
-				'note' => $value['farming_name'],
-				'time' => strtotime('now'),
+			$joint = array(
+				array('global_fee', 'global_fee.pkey=global_list.globalkey')
 			);
-			$this->insert('logs_farming', $dataHistory);
-			$refkey = $value['refkey'];
-			foreach ($reffList as $reffListKey => $reffListValue) {
-				$chekReff = $this->getDataRow('account', 'refkey', array('pkey' => $refkey));
-				if (count($chekReff) == 0)
-					break;
-				$refkey = $chekReff[0]['refkey'];
-				$reffFee = ($fixVal / 100) * $reffListValue['percentage'];
-				$this->set('account', array('pkey' => $refkey), array('crypto', 'crypto + ' . $reffFee, false));
-				$reffLog = array(
-					'refkey' => $refkey,
-					'targetkey' => $value['refkey'],
-					'value' => '+ ' . $reffFee,
-					'note' => 'refferal',
-					'time' => strtotime('now'),
-				);
-				$this->insert('logs_farming', $reffLog);
+			$data = $this->getDataRow('global_list', 'global_list.*,global_fee.*', '', '', $joint);
+			foreach ($data as $key => $value) {
+
+				$bonus = $value['fee'] / $value['limit_count'];
+				$this->set('account', array('pkey' => $value['refkey']), array('crypto', 'crypto +' . $bonus, false));
+				$this->insert('logs', array('refkey' => $value['refkey'], 'targetkey' => $value['refkey'], 'time' => strtotime('now'), 'note' => 'gpool Bonus', 'value' => '+' . $bonus));
 			}
+
+			$this->update('profile_company', array('dateclaim' => strtotime('+' . $company['gpolinterval'] . 'days')), array('id !=' => 0));
+			$this->update('global_fee', array('fee' => 0), array('pkey !=' => 0));
 		}
-		echo 'done';
-	}
-	public function testClient()
-	{
-		log_message('error', 'testClient jalan');
-		$client = new \GuzzleHttp\Client();
-		$r = $client->request('POST', 'http://localhost/cryptoRange/Api/testPost', [
-			'body' => 'raw data'
-		]);
-	}
-	public function testPost()
-	{
-		log_message('error', 'testPost jalan');
 	}
 }
