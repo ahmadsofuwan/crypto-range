@@ -161,7 +161,7 @@ class Game extends MY_Controller
 		while ($twig > 0) {
 			if (count($pkey) == 0)
 				break;
-			$dataRef = $this->getDataRow('account', 'refkey,pkey,username', '', '', '', '', array('refkey', $pkey));
+			$dataRef = $this->getDataRow('account', 'refkey,pkey,username', array('status' => 1), '', '', '', array('refkey', $pkey));
 
 			$pkey = [];
 			foreach ($dataRef as $item => $value) {
