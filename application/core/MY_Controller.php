@@ -20,6 +20,40 @@ class MY_Controller extends CI_Controller
         $this->db = $this->load->database($dbName, TRUE);
     }
 
+    public function HttpClient($url, $arrData)
+    {
+        $curl = curl_init();
+
+        $dataCurl = '';
+        $i = 0;
+        foreach ($arrData as $key => $value) {
+            $dataCurl .= $key . '=' . $value;
+
+            if ($i <> count($arrData) - 1) {
+                $dataCurl .= '&';
+            }
+            $i++;
+        }
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $dataCurl,
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/x-www-form-urlencoded',
+                'Cookie: ci_session=gnjim6l3d73gjaifpe67rcbbe9ivnq4u'
+            ),
+        ));
+        $response = curl_exec($curl);
+        curl_close($curl);
+        return $response;
+    }
+
     public function template($data)
     {
         $data['companyProfile'] = $this->getDataRow('profile_company', '*', '', 1);

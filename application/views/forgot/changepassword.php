@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Login</title>
+    <title>Forgot Password</title>
 
     <!-- Custom fonts for this template-->
     <link href="<?= base_url('asset/sb_admin2/'); ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -47,19 +47,17 @@
                             <div class="col-lg">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4" id="titleLogin"><?php echo $titleLogin ?></h1>
+                                        <h1 class="h4 text-gray-900 mb-4" id="titleLogin">New Password</h1>
                                     </div>
-                                    <form class="user" method="POST" action="<?= base_url('Auth/login') ?>">
+                                    <form class="user" method="POST" action="<?= base_url('Forgot/newpassword') ?>">
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user" id="username" name="username" aria-describedby="emailHelp" placeholder="Enter username...">
+                                            <input type="password" class="form-control form-control-user" name="password" placeholder="New Password">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Password">
+                                            <input type="password" class="form-control form-control-user" name="newpassword" placeholder="New Password">
                                         </div>
-                                        <div class="form-group">
-                                            <a href="<?= base_url('Forgot') ?>"><span class="text-salte-300">Forgot Password</span></a>
-                                        </div>
-                                        <button class="btn btn-primary btn-user btn-block" type="submit">Login</button>
+
+                                        <button class="btn btn-primary btn-user btn-block" type="submit">Submit</button>
                                     </form>
                                 </div>
                             </div>
@@ -99,3 +97,47 @@ if (!empty($this->session->flashdata('msg'))) {
     $this->session->set_flashdata('msg', '');
 }
 ?>
+
+<script>
+    $('#sendcode').click(function() {
+        var username = $('[name="username"]').val();
+        if (username == '') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Username Cannot be Empty'
+            })
+        } else {
+            $.ajax({
+                    url: '<?= base_url('Forgot/sendCode') ?>',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        username: username
+                    },
+                })
+                .done(function(res) {
+                    if (!res.status) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: res.msg
+                        })
+                    } else {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: res.msg,
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    }
+
+                    console.log(res);
+                })
+                .fail(function() {
+                    console.log('error');
+                })
+        }
+    })
+</script>
