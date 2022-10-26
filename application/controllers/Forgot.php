@@ -8,7 +8,7 @@ class Forgot extends MY_Controller
 {
 	public function index()
 	{
-		$this->load->view('forgot/index');
+		$this->load->view('forgot/forgot');
 	}
 	public function sendCode()
 	{
