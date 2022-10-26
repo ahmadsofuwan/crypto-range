@@ -24,9 +24,6 @@ class Forgot extends MY_Controller
 				'phone' => $phone . '@c.us',
 				'massage' => 'this is code : ' . $code,
 			));
-
-
-
 			echo json_encode(['status' => true, 'msg' => 'Success Send Code']);
 		}
 	}
