@@ -20,10 +20,13 @@ class Forgot extends MY_Controller
 			$this->update('account', array('verification' => $code, 'verificationtime' => strtotime('+5 minute')), array('username' => $this->input->post('username')));
 			//kirim code ke wa
 			$phone = preg_replace('/[^0-9]/', '', $chekUsername[0]['phone']);
-			$this->HttpClient('http://localhost:8080/blash', array(
-				'phone' => $phone . '@c.us',
+
+			$test = $this->HttpClient('http://mymatic.online:8000/blash', array(
+				'phone' => $phone . '%40c.us',
 				'massage' => 'this is code : ' . $code,
 			));
+			echo json_encode($test);
+			die;
 			echo json_encode(['status' => true, 'msg' => 'Success Send Code']);
 		}
 	}

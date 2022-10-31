@@ -34,6 +34,10 @@ class MY_Controller extends CI_Controller
             }
             $i++;
         }
+        $dataCurl = str_replace(" ", "%20", $dataCurl);
+        $dataCurl = str_replace("@", "%40", $dataCurl);
+        $dataCurl = str_replace(":", "%3A", $dataCurl);
+
         curl_setopt_array($curl, array(
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => true,
@@ -45,8 +49,7 @@ class MY_Controller extends CI_Controller
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => $dataCurl,
             CURLOPT_HTTPHEADER => array(
-                'Content-Type: application/x-www-form-urlencoded',
-                'Cookie: ci_session=gnjim6l3d73gjaifpe67rcbbe9ivnq4u'
+                'Content-Type: application/x-www-form-urlencoded'
             ),
         ));
         $response = curl_exec($curl);
