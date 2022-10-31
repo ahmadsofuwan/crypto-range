@@ -15,7 +15,7 @@ class Game extends MY_Controller
 		}
 		$this->limitRange = 10;
 		$this->limitLevel = 9;
-		$this->reffFee = [28, 3, 2, 2, 2, 2, 2, 3, 4, 2];
+		$this->reffFee = [30, 3, 2, 2, 2, 2, 2, 3, 4];
 		$this->npoolFee = [10];
 		$this->ClaimFee = [40, 15, 10, 5, 5, 5, 5, 5, 5, 5]; //fee npool claim
 	}
