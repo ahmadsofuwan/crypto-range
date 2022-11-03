@@ -317,6 +317,7 @@ class Admin extends MY_Controller
 			'username' => 'username',
 			'crypto' => 'crypto',
 			'role' => 'role',
+			'phone' => 'phone',
 		);
 		$formDetail = array();
 

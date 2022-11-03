@@ -48,6 +48,12 @@ if ($action == 'update')
 							</div>
 						</div>
 						<div class="form-group row">
+							<label for="phone" class="col-sm-3 col-form-label">Phone</label>
+							<div class="col-sm">
+								<input type="text" class="form-control" name="phone">
+							</div>
+						</div>
+						<div class="form-group row">
 							<label for="bonus" class="col-sm-3 col-form-label">Role</label>
 							<div class="col-sm">
 								<select name="role" class="form-control">
