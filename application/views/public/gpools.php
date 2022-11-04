@@ -31,7 +31,7 @@
                         <div class="text-center mb-4 mt-2 font-extrabold text-yellow-500 mb-2">POOLS <?= $key + 1 ?></div>
                         <div class="flex justify-center"><img src="<?= base_url('asset/public/img/usdt.png') ?>" alt="Usdt" class="w-20 lg:w-14"></div>
                         <div class="text-center font-extrabold"><?= $value['percentage'] ?>%</div>
-                        <div class="text-center mb-4 mt-2 font-extrabold text-yellow-500"><?= number_format($value['fee'], 2) ?> Matic</div>
+                        <div class="text-center mb-4 mt-2 font-extrabold text-yellow-500"><?= number_format($value['fee'], 2) ?> BUSD</div>
                         <?php
                         $limited = 0;
                         foreach ($limit as $Lkey => $Lvalue) {
@@ -46,7 +46,7 @@
                     <div>
                         <div class="uppercase font-extrabold text-slate-500 mt-2 text-center">Limit</div>
                         <div class="text-center text-slate-300 font-black text-2xl mt-4"><?= number_format($value['limit_count']) ?>/<?= number_format($value['count']) ?></div>
-                        <button class="capitalize text-slate-300 mt-4 bg-indigo-500 w-full py-1 rounded-lg bg-gradient-to-r from-violet-900 to-fuchsia-700 btn-stake" value="<?= $value['pkey'] ?>">Burn <span class="text-yellow-500"> <?= number_format($value['price']) ?> Matic</span></button>
+                        <button class="capitalize text-slate-300 mt-4 bg-indigo-500 w-full py-1 rounded-lg bg-gradient-to-r from-violet-900 to-fuchsia-700 btn-stake" value="<?= $value['pkey'] ?>">Burn <span class="text-yellow-500"> <?= number_format($value['price']) ?> BUSD</span></button>
                     </div>
                 </div>
             </div>

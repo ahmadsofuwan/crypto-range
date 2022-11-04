@@ -114,7 +114,7 @@
             })
 
     })
-    var matic = <?= $data['crypto'] ?>;
+    var matic = <?= $data['matic'] ?>;
     maticInt()
 
     function maticInt() {

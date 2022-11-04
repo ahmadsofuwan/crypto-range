@@ -32,12 +32,12 @@ class Game extends MY_Controller
 				$this->set('account', array('pkey' => $this->id), array('crypto', 'crypto - ' . $commpany['feeactive'], false));
 				$this->update('account', array('status' => 1), array('pkey' => $this->id));
 				$this->session->set_flashdata('active', true);
-				$this->session->set_flashdata('msg', 'your account has been done burn ' . $commpany['feeactive'] . ' Matic');
+				$this->session->set_flashdata('msg', 'your account has been done burn ' . $commpany['feeactive'] . ' BUSD');
 				$this->referalFee($commpany['feeactive']); //pembagian ke reff
 			} else {
 				$reff = $this->getDataRow('account', 'phone', array('pkey' => $account['refkey']))[0];
 				$this->session->set_flashdata('nonActive', true);
-				$this->session->set_flashdata('msg', 'your account is not active, Burn ' . $commpany['feeactive'] . ' Matic for Activate!');
+				$this->session->set_flashdata('msg', 'your account is not active, Burn ' . $commpany['feeactive'] . ' BUSD for Activate!');
 				$this->session->set_flashdata('reff', '<a href="https://wa.me/' . $reff['phone'] . '" target="_blank">WhastApp Upline</a>');
 			}
 		}

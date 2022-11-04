@@ -17,7 +17,7 @@
             <div class="text-center font-bold text-xl capitalize text-yellow-300">POOL</div>
             <div class="text-center font-bold text-xl capitalize text-yellow-300 ">
                 <div class="flex justify-content-center">
-                    <img src="<?php echo base_url('asset/public/img/') ?>usdt.png" alt="Logo" class="w-8">
+                    <img src="<?php echo base_url('asset/public/img/') ?>bsud.png" alt="Logo" class="w-8">
                     <?= number_format($feeOne, 2)  ?>
                     Matic
                 </div>

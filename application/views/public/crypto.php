@@ -2,8 +2,13 @@
     <div class="rounded-3xl bg-indigo-900 p-5 pb-4 grid grid-cols-1 divide-y">
         <div class="text-slate-300">
             <div class="flex">
-                <img src="<?php echo base_url('asset/public/img/usdt.png') ?>" alt="Usdt" class="w-fit h-fit">
-                <span class="mt-2 ml-2 font-extrabold text-lg" id="subCrypto"><?php echo number_format($account['crypto'], 3)  ?> Matic</span>
+                <img src="<?php echo base_url('asset/public/img/bsud.png') ?>" alt="Usdt" class="w-11 h-fit">
+                <span class="mt-2 ml-2 font-extrabold text-lg" id="subCrypto"><?php echo number_format($account['crypto'], 3)  ?> BUSD</span>
+
+            </div>
+            <div class="flex mt-2">
+                <img src="<?php echo base_url('asset/public/img/usdt.png') ?>" alt="Usdt" class="w-11 h-fit">
+                <span class="mt-2 ml-2 font-extrabold text-lg" id="subCrypto"><?php echo number_format($account['matic'], 3)  ?> Matic</span>
 
             </div>
             <a href="https://wa.me/<?= $upline['phone'] ?>" class="flex mt-3 w-fit">
@@ -89,7 +94,7 @@
         var elemnt = '<div><input type="text" id="userTarget" class="swal2-input" placeholder="Username"></div>';
         elemnt += '<div><input type="number" id="cryptoPopUp" class="swal2-input" placeholder="Amount Matic"></div>';
         Swal.fire({
-            title: '<div>Matic Balance <br> ' + baseCrypto + '<div>',
+            title: '<div>BUSD Balance <br> ' + baseCrypto + '<div>',
             html: elemnt,
             showCancelButton: true,
             confirmButtonText: 'Send',
