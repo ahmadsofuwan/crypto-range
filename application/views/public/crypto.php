@@ -29,6 +29,12 @@
                 </button>
             </div>
             <div class="flex justify-center mb-2">
+                <div class="hover:text-sm mx-2" id="switch">
+                    <svg class="mx-auto w-7 hover:w-9 rounded-lg" fill="none" stroke="#94a3b8" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M21,9L17,5V8H10V10H17V13M7,11L3,15L7,19V16H14V14H7V11Z" />
+                    </svg>
+                    <span class="text-xs">Switch</span>
+                </div>
                 <div class="hover:text-sm mx-2" id="cryptoSend">
                     <svg class="mx-auto w-7 hover:w-9 rounded-lg" fill="none" stroke="#94a3b8" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
@@ -92,7 +98,7 @@
     }
     $('#cryptoSend').click(function() {
         var elemnt = '<div><input type="text" id="userTarget" class="swal2-input" placeholder="Username"></div>';
-        elemnt += '<div><input type="number" id="cryptoPopUp" class="swal2-input" placeholder="Amount Matic"></div>';
+        elemnt += '<div><input type="number" id="cryptoPopUp" class="swal2-input" placeholder="Amount BUSD"></div>';
         Swal.fire({
             title: '<div>BUSD Balance <br> ' + baseCrypto + '<div>',
             html: elemnt,
@@ -272,6 +278,60 @@
                                     icon: 'error',
                                     title: 'Oops...',
                                     text: data.status,
+                                })
+                                break;
+                        }
+                    })
+                    .fail(function(a) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!'
+                        })
+                    })
+            }
+        })
+    })
+    $('#switch').click(function() {
+        var elemnt = '<div><input type="number" id="busd" class="swal2-input" placeholder="Amount BUSD" value="" min=""></div>';
+        Swal.fire({
+            title: '<div>Switch BUSD to Matic<div>',
+            html: elemnt,
+            showCancelButton: true,
+            confirmButtonText: 'Swicth',
+            showLoaderOnConfirm: true,
+            allowOutsideClick: false
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var bsud = $('#busd').val()
+                $.ajax({
+                        url: '<?php echo base_url('Game/ajax') ?>',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {
+                            action: 'swicth',
+                            busd: bsud,
+                        },
+                    })
+                    .done(function(data) {
+                        switch (data.status) {
+                            case 'success':
+                                Swal.fire({
+                                    position: 'mid',
+                                    icon: 'success',
+                                    title: 'Success swicth',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 1800);
+                                break;
+                            default:
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: data.msg,
                                 })
                                 break;
                         }

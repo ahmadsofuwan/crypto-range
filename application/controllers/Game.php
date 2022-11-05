@@ -234,11 +234,11 @@ class Game extends MY_Controller
 					die;
 				}
 				$account = $this->getDataRow('account', '*', array('pkey' => $this->id))[0];
-				if ($account['crypto'] < $this->input->post('widraw')) {
+				if ($account['matic'] < $this->input->post('widraw')) {
 					echo json_encode(array('status' => 'Matic is not enough'));
 					die;
 				} else {
-					$this->set('account', array('pkey' => $this->id), array('crypto', 'crypto -' . $this->input->post('widraw'), false));
+					$this->set('account', array('pkey' => $this->id), array('matic', 'matic -' . $this->input->post('widraw'), false));
 					$dataInsert = array('refkey' => $this->id, 'walletaddress' => $this->input->post('wallet'), 'time' => strtotime('now'), 'crypto' => $this->input->post('widraw'));
 					$this->insert('widraw', $dataInsert);
 					$this->insert('logs', array(
@@ -296,6 +296,38 @@ class Game extends MY_Controller
 					echo json_encode(['status' => 'This Fulli']);
 					die;
 				}
+				break;
+			case 'swicth':
+				$fee = 1;
+				$count = $this->input->post('busd');
+
+				$account = $this->getDataRow('account', '*', array('pkey' => $this->id))[0];
+				if ($account['crypto'] < $count) {
+					echo json_encode(['status' => 'BUSD not enough']);
+					die;
+				}
+
+				$busd = $this->HttpGet('https://api.coingecko.com/api/v3/simple/price', [
+					'ids' => 'binance-usd',
+					'vs_currencies' => 'usd',
+				]);
+				$busd = json_decode($busd, true)['binance-usd']['usd'];
+
+				$matic = $this->HttpGet('https://api.coingecko.com/api/v3/simple/price', [
+					'ids' => 'aave-polygon-wmatic',
+					'vs_currencies' => 'usd',
+				]);
+				$matic = json_decode($matic, true)['aave-polygon-wmatic']['usd'];
+				$percentage = ($matic * 0.01) * $fee;
+				$matic = $matic + $percentage;
+				$subMatic = $matic * 0.01;
+
+				$busdToMatic = ($busd / $subMatic) / 100;
+				$busdToMatic = $busdToMatic * $count;
+
+				$this->set('account', array('pkey' => $this->id), ['crypto', 'crypto -' . $count, false]); //kurangi crypto
+				$this->set('account', array('pkey' => $this->id), ['matic', 'matic +' . $busdToMatic, false]); //tambah matic
+				echo json_encode(['status' => 'success']);
 				break;
 			default:
 				echo json_encode(array('status' => 'nothing Action'));
