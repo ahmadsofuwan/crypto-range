@@ -33,7 +33,7 @@
                     <svg class="mx-auto w-7 hover:w-9 rounded-lg" fill="none" stroke="#94a3b8" viewBox="0 0 24 24">
                         <path fill="currentColor" d="M21,9L17,5V8H10V10H17V13M7,11L3,15L7,19V16H14V14H7V11Z" />
                     </svg>
-                    <span class="text-xs">Switch</span>
+                    <span class="text-xs">Swap</span>
                 </div>
                 <div class="hover:text-sm mx-2" id="cryptoSend">
                     <svg class="mx-auto w-7 hover:w-9 rounded-lg" fill="none" stroke="#94a3b8" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -295,7 +295,7 @@
     $('#switch').click(function() {
         var elemnt = '<div><input type="number" id="busd" class="swal2-input" placeholder="Amount BUSD" value="" min=""></div>';
         Swal.fire({
-            title: '<div>Switch BUSD to Matic<div>',
+            title: '<div>Swap BUSD to Matic<div>',
             html: elemnt,
             showCancelButton: true,
             confirmButtonText: 'Swicth',
@@ -319,7 +319,7 @@
                                 Swal.fire({
                                     position: 'mid',
                                     icon: 'success',
-                                    title: 'Success swicth',
+                                    title: 'Success Swap',
                                     showConfirmButton: false,
                                     timer: 1500
                                 })
